@@ -10,7 +10,12 @@
     <title>Страница расчета</title>
 </head>
 <body>
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue"></script>
+
+    <div id="ttt">
+        <p>{{title}}</p>
+    </div>
+    
     <div id="app">
     <div class="header">
         <h2>Logo site</h2>
@@ -25,10 +30,17 @@
             </div>
 
             <div class="parameter_room">
-                <h2>Параметры комнаты</h2>
-                <span>Длина <input type="text"> </span> <br/>
-                <span>Ширина <input type="text"> </span> <br/>
-                <span>Высота <input type="text"> </span>
+                <h2 @mouseover="change">Параметры комнаты</h2>
+                
+                <span>Длина  <input type="text" v-model="result" placeholder="0"> </span> <br/>
+                <span>Ширина <input type="text" v-on:input=""> </span> <br/>
+                <span>Высота <input type="text">  </span>
+                <p> {{ length_room }} </p>
+                <p> {{ width_room }} </p>
+
+                <input type="text" v-on:input="www ($event.target.value)">
+                <p> {{ a }} </p>
+                <p> {{ b }} </p>
 
             </div>
 
@@ -454,6 +466,7 @@
             Copyright 2021
         </div>
     </div>
+    
         <script src="counter.js"></script>
 </body>
 </html>
