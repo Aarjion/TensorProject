@@ -1,50 +1,60 @@
-from podgotovka import Square, Podgot_apartament
-from Material import Material_pol, Material_sten, Material_potolok
+from podgotovka import square, podgot_apartament
+from Material import material_pol, material_sten, material_potolok
 
 # ###################   Начальные значения   ####################### (в метрах)
-a = 5     # Длинна комнаты (метры)
-b = 3    # Ширина комнаты (метры)
-c = 2.3    # Высота комнаты (метры)
+length_room = 5     # Длинна комнаты (метры)
+width_room = 3    # Ширина комнаты (метры)
+height_room = 2.3    # Высота комнаты (метры)
 
-v_o = 1.2  # Высота окна (метры)
-d_o = 1.3  # Ширина окна (метры)
-v_d = 1.9   # Высота двери (метры)
-d_d = 0.9  # Ширина двери (метры)
+height_window = 1.2  # Высота окна (метры)
+width_window = 1.3  # Ширина окна (метры)
+height_door = 1.9   # Высота двери (метры)
+width_door = 0.9  # Ширина двери (метры)
 
-shi_ob = 50  # Ширина обоев (метры)
+width_wallpaper = 50  # Ширина обоев (метры)
 raport = 30  # Рапорт обоев для стыковки рисунка(если надо) (метры)
-cena_ob = 839.89  # Цена обоев
+price_wallpaper = 839.89  # Цена обоев
 
-sh_lin = 3   # Ширина лиолеума (метры)
-cena_l = 1300  # Цена линолеума
+length_panel = 2.2  # Динна панелей
+width_panel = 40  # Ширина панелей
+number_panels_box = 8  # Количество в упаковке
+price_panela = 5000  # Цена панелей
 
-cena_kras = 300  # Цена краски стены
-cena_krasp = 400  # Цена краски потолок
+width_linol = 3   # Ширина лиолеума (метры)
+price_linol = 1300  # Цена линолеума
 
-dlina_lam = 126  # (сантиметры)
-shir_lam = 18.5  # (сантиметры)
-kol_lam_kor = 8  # Количество штук в упаковке
-cena_lam = 2000  # Цена за упаковку
+price_paint = 300  # Цена краски стены
+price_paint_ceil = 400  # Цена краски потолок
 
-dlina_plitp = 40  # (сантиметры)
-shir_plitp = 20  # (сантиметры)
-kol_plit_korp = 6  # Количество штук в упаковке
-cena_plitp = 2000  # Цена за упаковку
+length_linol = 126  # (сантиметры)
+width_lamin = 18.5  # (сантиметры)
+number_lamin_box = 8  # Количество штук в упаковке
+price_lamin = 2000  # Цена за упаковку
 
-dlina_plits = 40  # (сантиметры)
-shir_plits = 20  # (сантиметры)
-kol_plit_kors = 6  # Количество штук в упаковке
-cena_plits = 2000  # Цена за упаковку
+length_tile_floor = 40  # (сантиметры)
+width_tile_floor = 20  # (сантиметры)
+number_tile_floor_box = 6  # Количество штук в упаковке
+price_tile_floor = 2000  # Цена за упаковку
 
+length_tile_wall = 40  # (сантиметры)
+width_tile_wall = 20  # (сантиметры)
+number_tiles_box_wall = 6  # Количество штук в упаковке
+price_tiles_wall = 2000  # Цена за упаковку
 
+length_dekor_tiles = 40
+width_dekor_tiles = 40
+number_dekor_tiles_box = 15
+price_dekor_tiles = 200
 ###############################################################################
 
 
-ne_s, s_s, s_p = Square(a, b, c, v_o, d_o, v_d, d_d)
-print("Не рабочая площадь:", ne_s, "\nПлощадь стен:", s_s, "\nПлощадь пола/потолка:", s_p)
+
+
+s_s, s_p = square(length_room, width_room, height_room, height_window, width_window, height_door, width_door)
+print("\nПлощадь стен:", s_s, "\nПлощадь пола/потолка:", s_p)
 
 shtuka, stoimost_sht, v_shpat, stoimost_spat_v, f_shpat, stoimost_spat_f, grunt, stoimost_grunt, stajka, \
- stoimost_stajka,  shpat, stoimost_spat = Podgot_apartament(s_s, s_p)
+ stoimost_stajka,  shpat, stoimost_spat = podgot_apartament(s_s, s_p)
 print("____СТЕНЫ____", "\nШтукатурка (кг): ", shtuka, "Стоимость(руб): ", stoimost_sht,
       "\nВыравнивающая шпатлёвка (кг):", v_shpat, "Стоимость(руб): ", stoimost_spat_v, "\nФинишная шпатлёвка (кг):",
       f_shpat, "Стоимость(руб): ", stoimost_spat_f, "\nГрунтовка (л):", grunt, "Стоимость(руб): ",

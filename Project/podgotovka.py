@@ -1,38 +1,39 @@
-def square(a, b, c, v_o, d_o, v_d, d_d):
+def square(length_room, width_room, height_room, height_window, width_window, height_door, width_door):
     # ##   Неактивная площадь комнаты  ###
-    ne_s = round((v_o * d_o) + (v_d * d_d), 2)
+    ne_s = round((height_window * width_window) + (height_door * width_door), 2)
 
     # ##   Рабочая площадь стен ###
-    s_s = round(2 * (a * c) + 2 * (b * c) - ne_s, 2)
+    wall_area = round(2 * (length_room * height_room) + 2 * (width_room * height_room) - ne_s, 2)
 
     # ##   Площадь пол/потолок ###
-    s_p = round(a * b, 2)
+    floor_area = round(length_room * width_room, 2)
 
-    return ne_s, s_s, s_p
+    return wall_area, floor_area
 
 
-def podgot_apartament(s_s, s_p):
+def podgot_apartament(wall_area, floor_area):
     # ########### Cтены ###############
     #  Расчёт Штукатурки  (Площадь * Толщину слоя * Расход штукатурки на 1м2) = количество в кг
-    shtuka = round(s_s * 1 * 17, 2)
-    stoimost_sht = round(14 * shtuka, 2)
+    plaster = round(wall_area * 1 * 17, 2)
+    cost_plaster = round(14 * plaster, 2)
 
     # Расчёт Шпатлёвка (в кг)
-    v_shpat = round(s_s * 4.5 * 0.5, 2)
-    f_shpat = round(s_s * 1 * 0.2, 2)
-    stoimost_spat_v = round(43 * v_shpat, 2)
-    stoimost_spat_f = round(40 * f_shpat, 2)
+    level_filling = round(wall_area * 4.5 * 0.5, 2)
+    finish_filling = round(wall_area * 1 * 0.2, 2)
+    cost_level_filling = round(43 * level_filling, 2)
+    cost_finish_filling = round(40 * finish_filling, 2)
 
     # Грунтовка (в кг)
-    grunt = round(s_s * 0.16, 2)
-    stoimost_grunt = round(84 * grunt, 2)
+    primer = round(wall_area * 0.16, 2)
+    cost_primer = round(84 * primer, 2)
 
     # ######### Потолок ###########
-    shpat = round(s_p * 1 * 0.2, 2)
-    stoimost_spat = round(40 * shpat, 2)
+    filling_floor = round(floor_area * 1 * 0.2, 2)
+    cost_filling_floor = round(40 * filling_floor, 2)
+
     # ######### Пол ##########
     # Стяжка (в кг)
-    stajka = round(s_p * 0.3 * 33, 2)
-    stoimost_stajka = round(stajka * 17, 2)
-    return shtuka, stoimost_sht, v_shpat, stoimost_spat_v, f_shpat, stoimost_spat_f, grunt, stoimost_grunt, stajka,\
-           stoimost_stajka, shpat, stoimost_spat
+    coupler = round(floor_area * 0.3 * 33, 2)
+    cost_coupler = round(coupler * 17, 2)
+    return plaster, cost_plaster, level_filling, cost_level_filling, finish_filling, cost_finish_filling, primer,\
+            cost_primer, coupler, cost_coupler, filling_floor, cost_filling_floor
