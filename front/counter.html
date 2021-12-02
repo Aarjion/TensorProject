@@ -38,9 +38,9 @@
                 <p> {{ length_room }} </p>
                 <p> {{ width_room }} </p>
 
-                <input type="text" v-on:input="www ($event.target.value)">
-                <p> {{ a }} </p>
-                <p> {{ b }} </p>
+                <input v-model="text" type="text" v-on:input="www ($event.target.value)">
+                <p> {{ text }} </p>
+               
 
             </div>
 

@@ -1,10 +1,10 @@
 var vue = new Vue ({
     el: "#app",
     data: {
-       result: ''
-       
+      text: 'Hi Kate !!!' 
     },
     methods: {
    
     }
 });
+
