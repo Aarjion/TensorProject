@@ -11,6 +11,7 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue"></script>
+    <script src="Calculate.js"></script>
 
     <div id="ttt">
         <p>{{title}}</p>
@@ -32,9 +33,9 @@
             <div class="parameter_room">
                 <h2 @mouseover="change">Параметры комнаты</h2>
                 
-                <span>Длина  <input type="text" v-model="result" placeholder="0"> </span> <br/>
-                <span>Ширина <input type="text" v-on:input=""> </span> <br/>
-                <span>Высота <input type="text">  </span>
+                <span>Длина  <input type="text" id="long_room" v-model="result" placeholder="0"> </span> <br/>
+                <span>Ширина <input type="text" id="width_room" v-on:input=""> </span> <br/>
+                <span>Высота <input type="text" id="height_room">  </span>
                 <p> {{ length_room }} </p>
                 <p> {{ width_room }} </p>
 
@@ -46,15 +47,17 @@
 
             <div class="nonwork_area">
                 <h2>Не рабочая площадь</h2> <br/>
-                <button>Добавить окно</button> <br/><br/>
+                <!-- <button>Добавить окно</button> <br/><br/> -->
                 Окно № <number></number>
-                Высота <input type="text">
-                Ширина <input type="text">
+                Высота <input id="height_window" type="text">
+                Ширина <input id="width_window" type="text">
+                Количество окон <input id="count_windows" type="number">
                 <br/>
-                <button>Добавить дверь</button> <br/>
+                <!-- <button>Добавить дверь</button> <br/> -->
                 Дверь № <number></number>
-                Высота <input type="text">
-                Ширина <input type="text">
+                Высота <input id="height_door" type="text">
+                Ширина <input id="width_door" type="text">
+                Количество дверей <input id="count_doors" type="number">
 
             </div>
 
@@ -63,33 +66,32 @@
                 <h2>Параметры ремонта</h2><br/>
                 Потолок
                     <select>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
 
                     </select>
                 Стены
                     <select>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
 
                     </select>
                 Пол
                     <select>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
-                        <option> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
+                        <option id=""> </option>
                     </select>
             </div>
 
