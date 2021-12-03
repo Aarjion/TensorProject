@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Страница авторизации</title>
+        <link rel="stylesheet" href="../static/mainPage.css">
+        <!--<link rel="shortcut icon" href=".jpg" type="image/x-icon">
+        <link rel="stylesheet" href=".css">-->
+
+    </head>
+    <body>
+        <div class="header">
+            <h2>Logo site</h2>
+            <a href="/account"><img class="login" src="../static/resourses/img/login.png"></a>
+            <a href=""><img class="burg" src="../static/resourses/img/burg.png"></a>
+        </div>
+        
+        <div class="content">
+            <h2>Авторизация</h2>
+            {% if message %} 
+                <p>{{ message }}</p>
+            {% endif %}
+            <div id="wrapper">
+                <form id="form_authorization" action="/authorization/submit" method="post">
+                    <fieldset class="form__fieldset">
+                        <legend class="form__fieldset_legend">Авторизация</legend>
+                        <div class="form__fieldset_input cursorText"><label for="check_login">Логин*</label><input type="text" placeholder="your login" name="check_login"  pattern="[A-Za-z0-9]{3,}" required></div>
+                        <div class="form__fieldset_input cursorText"><label for="check_password">Пароль*</label><input type="password" placeholder="p@ssw0rd" name="check_pass" required></div>
+                        <div id="form__fieldset_buttons">
+                            <input type="submit" class="cursorPointer" value="Войти">
+                            <input type="reset" class="cursorPointer" value="Очистить">
+                        </div>
+                    </fieldset>
+                    <p>Еще не зарегистрированы? <a href="">Регистрация</a></p>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer">
+        
+        </div>
+    </body>
+</html>
