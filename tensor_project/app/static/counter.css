@@ -1,52 +1,5 @@
-/* h3{
-    width: 990px;
-} */
-
-/* label{ */
-    /* margin-left: -55%; */
-/* } */
-
-/* input{
-    width: 30%;
-} */
-
-/* .otdel{
-    /* margin-top: 5%; */
-     /* display: flex;
-     justify-content: left; */
-     /* padding-left: 5%; */
-    
-/* }  */
-
-/* .room{ */
-    /* border: 2px solid black; */
-    /* display: flex;
-    justify-content: space-around; */
-    /* flex-wrap: wrap;
-    align-self: center; */
-    /* flex-grow: 1;
-    flex-shrink: 1; */
-    /* padding: 2%; */
-/* } */
-/* .room div{
-    width: 300px;
-} */
-
-/* .name_room{ */
-    /* background-color: #fff; */
-    /* width: 1000px;
-    height: 100px;
-    padding-right: 100%; */
-
-/* } */
-/* .content{
-    background-color: cadetblue;
-} */
-
-
-
 .room{
-    border: 2px solid black;
+    /* border: 2px solid black; */
     height: 380px;
     width: 98%;
     margin-left: 1%;
@@ -85,7 +38,7 @@
 
 a.button28 {
     margin-left: 1%;
-    margin-top: 1%;
+    margin-top: 12%;
     position: relative;
     display: inline-block;
     font-size: 90%;
