@@ -3,11 +3,11 @@ function square() {
         width_door
 
     length_room = document.getElementById('long_room');
-    // length_room = parseFloat(length_room.value).toFixed(2);
+    length_room = parseFloat(length_room.value).toFixed(2);
     width_room = document.getElementById('width_room');
-    // width_room = parseFloat(width_room.value).toFixed(2);
+    width_room = parseFloat(width_room.value).toFixed(2);
     height_room = document.getElementById('height_room');
-    // height_room = parseFloat(height_room.value).toFixed(2);
+    height_room = parseFloat(height_room.value).toFixed(2);
 
     count_window = document.getElementById('count_window');
     count_window =  parseInt(count_window.value).toFixed(2);
@@ -15,6 +15,7 @@ function square() {
     height_window = parseFloat(height_window.value).toFixed(2);
     width_window = document.getElementById('width_window');
     width_window = parseFloat(width_window.value).toFixed(2);
+
     count_door = document.getElementById('count_door');
     count_door =  parseInt(count_door.value).toFixed(2);
     height_door = document.getElementById('height_door');
@@ -22,17 +23,16 @@ function square() {
     width_door = document.getElementById('width_door');
     width_door = parseFloat(width_door.value).toFixed(2);
 
-
 ///   #///     Неактивная площадь комнаты  ###
     var ne_s = (height_window * width_window) * count_window + (height_door * width_door) * count_door
-    // var ne_s = (height_window * width_window)  + (height_door * width_door) 
 
 //   #///     Рабочая площадь стен ###
     var wall_area = 2 * (length_room * height_room) + 2 * (width_room * height_room) - ne_s
 
 //   #///     Площадь пол/потолок ###
-    var floor_area = Math.length_room * width_room
+    var floor_area = length_room * width_room
 
+    alert(wall_area)
     return {wall_area:wall_area, floor_area:floor_area}
 }
 
@@ -71,7 +71,7 @@ function apartament_preparation() {
 ///   ########///   Потолок ###########
     var filling_floor = floor_area * 1 * 0.2
     var cost_filling_floor = 40 * filling_floor
-    document.getElementById('').innerHTML =Math.ceil(filling_floor)
+    document.getElementById('').innerHTML = Math.ceil(filling_floor)
     document.getElementById('').innerHTML = cost_filling_floor
 
 
@@ -262,18 +262,15 @@ function material_potolok() {
 // ЧЕк на кнопочку посчитать всё (Катя упоминала какой-то более логичный способ не через if)
 
 function calculate(){
-    var wall_area, floor_area = square();
-    // apartament_preparation();
-    document.getElementById('www').innerHTML = width_room;
-    
-    alert();
-    // if (check_na_stenu == true){
-    //     material_sten()
-    // }
-    // if (check_na_pol == true){
-    //     material_pol()
-    // }
-    // if (check_na_potolok == true){
-    //     material_potolok()
-    // }
+    var wall_area, floor_area = square()
+    apartament_preparation()
+    if (check_na_stenu == true){
+        material_sten()
+    }
+    if (check_na_pol == true){
+        material_pol()
+    }
+    if (check_na_potolok == true){
+        material_potolok()
+    }
 }

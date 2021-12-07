@@ -1,16 +1,16 @@
-from flask import Flask, request, session
+from flask import Flask, request, session, redirect, json
 from flask.templating import render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 #from flask_login import login_required#, LoginManager#, UserMixin
 import hashlib
+from sqlalchemy import text
 
 app = Flask(__name__, template_folder="app/templates", static_folder="app/static/")
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:7105@localhost/tensor'
 app.config['SECRET_KEY'] = 'cb02820a3e94d72c9f950ee10ef7e3f7a35b3f5b'
 db = SQLAlchemy(app)
-
 
 class User(db.Model):
     __tablename__='users' 
@@ -24,16 +24,77 @@ class User(db.Model):
         self.password=password
         #self.table_apartment=table_apartment
 
+class Materials(db.Model):
+    __tablename__='materials' 
+    id = db.Column(db.Integer, primary_key=True)
+    name_material = db.Column(db.String)
+    units_measurement = db.Column(db.String)
+    surfaces = db.Column(db.String(3))
+    auto = db.Column(db.Integer)
+
+class Autotools(db.Model):
+    __tablename__='autotools' 
+    id = db.Column(db.Integer, primary_key=True)
+    name_tools = db.Column(db.String)
+
+class Apartments(db.Model):
+    __tablename__='apartment' 
+    id = db.Column(db.Integer, primary_key=True)
+    name_room = db.Column(db.String)
+    id_materials_ceiling = db.Column(db.Integer)
+    id_tools_ceiling = db.Column(db.Integer)
+    id_materials_floor = db.Column(db.Integer)
+    id_tools_floor = db.Column(db.Integer)
+    id_materials_walls = db.Column(db.Integer)
+    id_tools_walls = db.Column(db.Integer)
+    id_auto_material = db.Column(db.Integer)
+    id_tools_auto_material = db.Column(db.Integer)
+    square_walls = db.Column(db.Float)
+    square_floor_ceiling = db.Column(db.Float)
+
+    def __init__(self, square_walls, square_floor_ceiling):
+        self.square_walls=square_walls
+        self.square_floor_ceiling=square_floor_ceiling
+
+def get_materials():
+    sql = text("SELECT name_material FROM materials Where surfaces % 10 = 1 and auto = '0' ORDER BY name_material")
+    db_materials_floor = db.session.execute(sql).all()
+    print (db_materials_floor)
+
+    sql = text("SELECT name_material FROM materials Where surfaces / 10 % 10 = 1 and auto = '0' ORDER BY name_material")
+    db_materials_walls = db.session.execute(sql).all()
+    print (db_materials_walls)
+
+    sql = text("SELECT name_material FROM materials Where surfaces / 100 = 1 and auto = '0' ORDER BY name_material")
+    db_materials_ceiling = db.session.execute(sql).all()
+    print (db_materials_ceiling)
+    return db_materials_ceiling
+
 CORS(app)
 @app.route('/', methods=['POST', 'GET'])
-@app.route('/counter', methods=['POST', 'GET'])
+@app.route('/main')
+def main():
+    session['url'] = request.path
+    return render_template('mainPage.html')
+
+@app.route('/counterPage', methods=['POST', 'GET'])
 def index(): 
-    return render_template('counter.html')
+    db_materials = get_materials()
+    
+    session['result_authorization'] = 0
+
+    global selected
+    post = request.args.get('post', 0, type=int)
+    return json.dumps({'selected post': str(post)})
+
+    return render_template('counterPage.html', description=db_materials)
 
 
 @app.route('/authorization')
 def auth():
     return render_template('authorization.html')
+
+
 
 
 @app.route('/authorization/submit', methods=['POST', 'GET'])
@@ -52,14 +113,15 @@ def auth_sub():
                 session['user'] = username
                 session.modified = True
                 message = "Авторизация прошла успешно"
+                if(session['url'] == "/account"):
+                    session['url'] = ""
+                    return render_template('account.html')
             else:
                 session['result_authorization'] = 0
                 session.modified = True
-                message = "Неверный пароль"
-        else: message = "Неверный логин или пароль"
+                message = "Неверный логин или пароль"
 
-
-    return render_template('account.html', message=message)
+    return render_template('authorization.html', message=message)
 
 @app.route('/registration', methods=['POST', 'GET'])
 def reg_sub():
@@ -89,13 +151,17 @@ def account():
         return render_template('account.html')
     else:
         message="Авторизуйтесь для входа в личный кабинет"
+        session['url'] = request.path
         return render_template('authorization.html', message=message)
 
 @app.route('/exit')
 def exit():
     session['result_authorization'] = 0
     session['user'] = ''
-    return render_template('counter.html')
+    return render_template('counterPage.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+@app.route('/main')
+def main():
+    return render_template('mainPage.html')
