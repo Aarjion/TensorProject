@@ -4,21 +4,32 @@
 
 /*-----------------------------------------CONTENT------------------------------------------*/
 #prem{
-    width: 40%;
+    width: 30%;
     /* height: 40%; */
 }
 
 
 .blockInfo{
-    margin-left: 1%;
-    margin-top: 1%;
+    /* margin-left: 1%;
+    margin-top: 1%; */
     display: flex;
     flex-direction: row;
 }
 
+.img1{
+  display: flex;
+  flex-direction: column;
+  margin-left: 0%;
+  margin-top: -25%;
+  
+}
 
-
-
+.img2{
+  display: flex;
+  flex-direction: column;
+  margin-left: 55%;
+  margin-top: -25%;
+}
 
 
   /* button */
@@ -31,8 +42,8 @@
   }
   
   .button {
-      margin-top: -50%;
-      margin-left: 70%;
+      margin-top: 25%;
+      margin-left: 200%;
     min-width: 300px;
     min-height: 60px;
     font-family: 'Nunito', sans-serif;
@@ -107,28 +118,3 @@
       opacity: 0;
     }
   } 
-/* button */
-
-/*.blockInfo1, .blockInfo2, .blockInfo3, .blockInfo4{*/
-/*    width: 100px;*/
-/*    height: 100px;*/
-
-/*    background: #787878;*/
-/*    border-radius: 10px;*/
-/*}*/
-
-
-/*-----------------------------------------FOOTER-------------------------------------------*/
-/* .footer{
-    background-color: darkgrey;
-    width: 99%;
-    /*overflow: hidden;*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-
-    /* position: absolute;
-    width: 300px;
-    height: 50px;
-
-    top: 690px;
-}  */
