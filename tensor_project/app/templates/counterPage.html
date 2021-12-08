@@ -56,7 +56,7 @@
                 <label> Высота </label>
                 <input type="text" class="form-control" id="height_room" placeholder="0.0 (м)" required>
             </div>
-     
+
         </div>
 
         <div class="form-row" id="block2">
@@ -106,29 +106,115 @@
         <a class="label label-primary"  onclick="myFunction({very:id})" > Compare</a>
 
 
-        <select v-model="select_ceiling" id="input_ceiling" class="form-control">
+        <select v-model="select_ceiling" id="input_ceiling" class="form-control" name="select">
           <option>Выбрать материал</option>
+          <option id="1" value="Потолочная плитка"> Потолочная плитка </option>
+          <option id="2" value="Краска"> Краска </option>
 
         </select>
       </div>
+
+<!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА -->
+
+                                <div id="select1_id1">
+                                  <div class="form-group col-md-7">
+                                    <label> Длина плитки </label>
+                                    <input type="text" class="form-control" id="length_potolPlit" placeholder="0.0 (м)" >
+                                </div> 
+                                <div class="form-group col-md-7">
+                                  <label> Ширина плитки</label>
+                                  <input type="text" class="form-control" id="width_potolPlit" placeholder="0.0 (м)" >
+                              </div> 
+                              <div class="form-group col-md-7">
+                                <label> Стоимость </label>
+                                <input type="text" class="form-control" id="price_potolPlit" placeholder=" (руб/м2)" >
+                              </div>
+                              <div class="">
+
+                                <p><label><input type="checkbox" name="sortament" value="1" id="galtel"> 
+                                  <span>Галтель<br />(потолочный плинтус)</span></label></p>
+
+                                <!-- <p><label><input type="checkbox" name="sortament" value="2" id="galtel"> 
+                                  <span>Галтель<br />(потолочный плинтус)</span></label></p> -->
+                                  
+                            
+                              </div>  
+                                </div>
+
+                                <div id="select1_id2">
+                                  <div class="form-group col-md-7">
+                                    <label> Нормативный <br /> расход краски </label>
+                                    <input type="text" class="form-control" id="rashod_kraska" placeholder="0.0 (л/м2)" >
+                                </div> 
+                              
+                              <div class="form-group col-md-7">
+                                <label> Стоимость </label>
+                                <input type="text" class="form-control" id="price_potolPlit" placeholder="0.0 (руб)" >
+                              </div>
+                              <div class="">
+                          
+                                <p><label><input type="checkbox" name="sortament" value="1" id="galtel"> 
+                                  <span>расчитать галтель<br />(потолочный плинтус)</span></label></p>
+                          
+                                <!-- <p><label><input type="checkbox" name="sortament" value="2" id="galtel"> 
+                                  <span>Галтель<br />(потолочный плинтус)</span></label></p> -->
+                                  
+                             
+                              </div>  
+                                </div>
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
+
 
       <div class="form-group col-md-4">
         <label> <b> Стена </b> </label>
 
-        <select v-model="select_wall" id="input_wall" class="form-control">
+        <select v-model="select_wall" id="input_wall" class="form-control" name="select_5">
           <option selected> Выбрать материал </option>
-          <option>...</option>
+          <option id="1" value="Обои"> Обои </option>
+          <option id="2" value="Плитка"> Плитка </option>
         </select>
       </div>
+
+<!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН -->
+                              <div id="select2_id1">
+                                  <div class="form-group col-md-7">
+                                    <label> Длина рулона </label>
+                                    <input type="text" class="form-control" id="length_potolPlit" placeholder="0.0 (м)" >
+                                  </div> 
+
+                                  <div class="form-group col-md-7">
+                                    <label> Ширина рулона</label>
+                                    <input type="text" class="form-control" id="width_potolPlit" placeholder="0.0 (м)" >
+                                  </div>
+
+                                  <div class="form-group col-md-7">
+                                    <label> Стоимость </label>
+                                    <input type="text" class="form-control" id="price_potolPlit" placeholder=" (руб/рул)" >
+                                  </div>
+
+                                  <!-- <div class="">
+                                    <p><label><input type="checkbox" name="sortament" value="1" id="galtel"> 
+                                      <span>Галтель<br />(потолочный плинтус)</span></label></p>
+                                  </div> -->
+
+                              </div>
+
+<!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН -->      
 
       <div class="form-group col-md-4">
         <label> <b> Пол </b> </label>
 
-        <select v-model="select_floor" id="input_floor" class="form-control">
-          <option selected> Выбрать материал </option>
-          <option>...</option>
+        <select v-model="select_floor" id="input_floor" class="form-control" name="select_5">
+          <option selected="selected" disabled="disabled"> Выбрать материал </option>
+          <option id="1" value="Линолеум"> Линолеум </option>
+          <option id="2" value="Плитка"> Плитка </option>
+          <option id="3" value="Наливной пол"> Наливной пол </option>
         </select>
       </div>
+
+      
 
       <!-- <input type="text" id="www"> -->
 
@@ -154,18 +240,19 @@
 
 </div>
 
-<footer class="text-center text-lg-start text-white"
+
+<!-- <footer class="text-center text-lg-start text-white"
             style="background-color: #1c2331; margin-top: 5.9%;" >
 </section>
-<!-- Section: Links  -->
+
 <section class="">
 <div class="container text-center text-md-start mt-5" style="height: 214px;">
-  <!-- Grid row -->
+
   <div class="row mt-3">
-    <!-- Grid column -->
-    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-      <!-- Content -->
-      <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
+
+    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"> -->
+ 
+      <!-- <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -176,9 +263,9 @@
       </p>
     </div>
    
-    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-      <!-- Links -->
-      <h6 class="text-uppercase fw-bold">Наши продукты</h6>
+    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> -->
+  
+      <!-- <h6 class="text-uppercase fw-bold">Наши продукты</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -189,9 +276,9 @@
       </p>
     </div>
   
-    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5">
-      <!-- Links -->
-      <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
+    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5"> -->
+ 
+      <!-- <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -226,9 +313,9 @@
   </div>
 
 </div>
-</section>
+</section> -->
 
-<div
+<!-- <div
    class="text-center p-3"
    style="background-color: rgba(0, 0, 0, 0.2)"
    >
@@ -236,7 +323,9 @@
 <a class="text-white" href="https://PPM.ru/"
    >PPM.ru</a>
 
-</div>
+</div> -->
+
+
 
 <script src="../static/counter.js"></script>
 <script src="../static/Calculate.js"></script>
