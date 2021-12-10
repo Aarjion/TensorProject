@@ -103,13 +103,14 @@
 
       <div class="form-group col-md-4">
         <label> <b> Потолок </b> </label>
-        <a class="label label-primary"  onclick="myFunction({very:id})" > Compare</a>
-
 
         <select v-model="select_ceiling" id="input_ceiling" class="form-control" name="select">
           <option>Выбрать материал</option>
           <option id="1" value="Потолочная плитка"> Потолочная плитка </option>
           <option id="2" value="Краска"> Краска </option>
+          {% for opt in range(option_ceiling|length) %}
+          <option id="{{ option_ceiling[opt][1] }}">{{ option_ceiling[opt][0] }}</option>
+          {% endfor %}
 
         </select>
       </div>
@@ -174,6 +175,9 @@
           <option selected> Выбрать материал </option>
           <option id="1" value="Обои"> Обои </option>
           <option id="2" value="Плитка"> Плитка </option>
+          {% for opt in range(option_walls|length) %}
+          <option id="{{ option_walls[opt][1] }}">{{ option_walls[opt][0] }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -211,6 +215,9 @@
           <option id="1" value="Линолеум"> Линолеум </option>
           <option id="2" value="Плитка"> Плитка </option>
           <option id="3" value="Наливной пол"> Наливной пол </option>
+          {% for opt in range(option_floor|length) %}
+          <option id="{{ option_floor[opt][1] }}">{{ option_floor[opt][0] }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -244,12 +251,9 @@
 <!-- <footer class="text-center text-lg-start text-white"
             style="background-color: #1c2331; margin-top: 5.9%;" >
 </section>
-
 <section class="">
 <div class="container text-center text-md-start mt-5" style="height: 214px;">
-
   <div class="row mt-3">
-
     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"> -->
  
       <!-- <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
@@ -297,9 +301,7 @@
         <a href="#!" class="text-white">Статьи о ремонте</a>
       </p>
     </div>
-
     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
       <h6 class="text-uppercase fw-bold">Контакты</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
@@ -311,7 +313,6 @@
       
     </div>
   </div>
-
 </div>
 </section> -->
 
@@ -322,7 +323,6 @@
 © 2021 Copyright:
 <a class="text-white" href="https://PPM.ru/"
    >PPM.ru</a>
-
 </div> -->
 
 

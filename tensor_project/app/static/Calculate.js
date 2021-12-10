@@ -9,14 +9,13 @@ function square() {
     height_room = document.getElementById('height_room');
     height_room = parseFloat(height_room.value).toFixed(2);
 
-    count_window = document.getElementById('count_window');
-    count_window =  parseInt(count_window.value).toFixed(2);
+    // count_window = document.getElementById('count_windows');
+    // count_window =  parseInt(count_window.value).toFixed(2);
     height_window = document.getElementById('height_window');
     height_window = parseFloat(height_window.value).toFixed(2);
     width_window = document.getElementById('width_window');
     width_window = parseFloat(width_window.value).toFixed(2);
-
-    count_door = document.getElementById('count_door');
+    count_door = document.getElementById('count_doors');
     count_door =  parseInt(count_door.value).toFixed(2);
     height_door = document.getElementById('height_door');
     height_door = parseFloat(height_door.value).toFixed(2);
@@ -24,15 +23,16 @@ function square() {
     width_door = parseFloat(width_door.value).toFixed(2);
 
 ///   #///     Неактивная площадь комнаты  ###
-    var ne_s = (height_window * width_window) * count_window + (height_door * width_door) * count_door
+    //var ne_s = (height_window * width_window) * count_window + (height_door * width_door) * count_door
+    var ne_s = (height_window * width_window)  + (height_door * width_door) 
 
 //   #///     Рабочая площадь стен ###
     var wall_area = 2 * (length_room * height_room) + 2 * (width_room * height_room) - ne_s
 
 //   #///     Площадь пол/потолок ###
-    var floor_area = length_room * width_room
+    var floor_area = Math.ceil(length_room * width_room)
 
-    alert(wall_area)
+
     return {wall_area:wall_area, floor_area:floor_area}
 }
 
@@ -45,42 +45,35 @@ function apartament_preparation() {
 ///   ##########///   Cтены ###############
 ///    Расчёт Штукатурки  (Площадь * Толщину слоя * Расход штукатурки на 1м2) = количество в кг
     var plaster = wall_area * 1 * 17
-    var cost_plaster = 14 * plaster
-    document.getElementById('').innerHTML = Math.ceil(plaster)
-    document.getElementById('').innerHTML = cost_plaster
+    var cost_plaster = Math.ceil(14 * plaster)
 
 
 ///   Расчёт Шпатлёвка (в кг)
-    var level_filling = wall_area * 4.5 * 0.5
-    var finish_filling = wall_area * 1 * 0.2
-    var cost_level_filling = 43 * level_filling
-    var cost_finish_filling = 40 * finish_filling
-    document.getElementById('').innerHTML = Math.ceil(level_filling)
-    document.getElementById('').innerHTML = Math.ceil(finish_filling)
-    document.getElementById('').innerHTML = cost_level_filling
-    document.getElementById('').innerHTML = cost_finish_filling
+    var level_filling = Math.ceil(wall_area * 4.5 * 0.5)
+    var finish_filling = Math.ceil(wall_area * 1 * 0.2)
+    var cost_level_filling = Math.ceil(43 * level_filling)
+    var cost_finish_filling = Math.ceil(40 * finish_filling)
 
 
 ///   Грунтовка (в кг)
-    var primer = wall_area * 0.16
-    var cost_primer = 84 * primer
-    document.getElementById('').innerHTML = Math.ceil(primer)
-    document.getElementById('').innerHTML = cost_primer
+    var primer = Math.ceil(wall_area * 0.16)
+    var cost_primer = Math.ceil(84 * primer)
 
 
 ///   ########///   Потолок ###########
-    var filling_floor = floor_area * 1 * 0.2
-    var cost_filling_floor = 40 * filling_floor
-    document.getElementById('').innerHTML = Math.ceil(filling_floor)
-    document.getElementById('').innerHTML = cost_filling_floor
+    var filling_floor = Math.ceil(floor_area * 1 * 0.2)
+    var cost_filling_floor = Math.ceil(40 * filling_floor)
 
 
 ///   ########///   Пол ##########
 ///   Стяжка (в кг)
-    var coupler = floor_area * 0.3 * 33
-    var cost_coupler = coupler * 17
-    document.getElementById('').innerHTML = Math.ceil(coupler)
-    document.getElementById('').innerHTML = cost_coupler
+    var coupler = Math.ceil(floor_area * 0.3 * 33)
+    var cost_coupler = Math.ceil(coupler * 17)
+
+    return {plaster:plaster, cost_plaster:cost_plaster, level_filling:level_filling, finish_filling:finish_filling,
+        cost_level_filling:cost_level_filling, cost_finish_filling:cost_finish_filling, primer:primer,
+        cost_primer:cost_primer, filling_floor:filling_floor, cost_filling_floor:cost_filling_floor,
+        coupler:coupler, cost_coupler:cost_coupler}
 
 }
 
@@ -96,7 +89,7 @@ function calculate_quantity() {
     var number_packegs = number_parts / number_in_packeging  ///   Количество упаковок
     var cost = number_packegs * price
 
-    return {number_packegs:number_packegs, cost:cost}
+    return {number_packegs:number_packegs, cost:cost, level_filling:level_filling, }
 }
 
 
