@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/counter.css">
+    <link rel="stylesheet" href="../static/ARA.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="app">
+<div class="header">
+
+  <nav class="navbar navbar-expand-sm" id="nav1">
+    <a class="navbar-brand" href="/mainPage"><img src="../static/resourses/img/PPM1.png" style="height: 40px; padding-left: 15%;"></a>
+    <a class="navbar" href="/authorization" ><img src="../static/resourses/img/account.png" style="height: 40px; margin-left: 2900%;"></a>
+    {% if session['user']%}
+    <a class="navbar" href="/exit" >Выход</a>
+    {% endif %}
+
+  </nav>
+
+</div>
+<div class="content">
+
+  <div class="room" id="room">
+    <form class="room_renovation">
+
+      <div class="form-row" id="block0">
+       <h2> Название комнаты </h2> 
+
+      <div class="form-group col-md-2">
+          <input type="text" class="form-control" id="name_room" placeholder="Гостиная" required style="margin-top: 1.5%; margin-left: 2%;">
+      </div> 
+    </div>
+
+        <div class="form-row" id="block1">
+
+            <legend> <h5> ПАРАМЕТРЫ КОМНАТЫ </h5> </legend>
+
+            <div class="form-group col-md-1">
+                <label> Длина </label>
+                <input type="text" class="form-control" id="long_room" placeholder="0.0 (м)" required>
+            </div> 
+            <div class="form-group col-md-1">
+                <label> Ширина </label>
+                <input type="text" class="form-control" id="width_room" placeholder="0.0 (м)" required>
+            </div>
+            <div class="form-group col-md-1">
+                <label> Высота </label>
+                <input type="text" class="form-control" id="height_room" placeholder="0.0 (м)" required>
+            </div>
+
+        </div>
+
+        <div class="form-row" id="block2">
+
+          <legend> <h5> НЕИСПОЛЬЗУЕМАЯ ПЛОЩАДЬ </h5> </legend>
+        <div>
+          <b> Дверь </b>
+          <div class="form-group col-md-7">
+              <label> Длина </label>
+              <input type="text" class="form-control" id="height_door" placeholder="0.0 (м)" >
+          </div> 
+          <div class="form-group col-md-7">
+              <label> Ширина </label>
+              <input type="text" class="form-control" id="width_door" placeholder="0.0 (м)">
+          </div>
+          <div class="form-group col-md-7">
+            <label> Количество </label>
+            <input type="text" class="form-control" id="count_door" placeholder="1 (шт)">
+          </div>
+        </div>
+
+        <div>
+          <b> Окно </b>
+          <div class="form-group col-md-7">
+              <label> Длина </label>
+              <input type="text" class="form-control" id="height_window" placeholder="0.0 (м)" >
+          </div> 
+          <div class="form-group col-md-7">
+              <label> Ширина </label>
+              <input type="text" class="form-control" id="width_window" placeholder="0.0 (м)">
+          </div>
+          <div class="form-group col-md-7">
+            <label> Количество </label>
+            <input type="text" class="form-control" id="count_window" placeholder="1 (шт)">
+          </div>
+        </div>
+
+   
+      </div>
+
+    <div class="form-row" id="block3">
+
+      <legend> <h5>ПАРАМЕТРЫ РЕМОНТА</h5> </legend>
+
+      <div class="form-group col-md-4">
+        <label> <b> Потолок </b> </label>
+
+        <select v-model="select_ceiling" id="input_ceiling" class="form-control" name="select">
+          <option>Выбрать материал</option>
+          <option id="1" value="Потолочная плитка"> Потолочная плитка </option>
+          <option id="2" value="Краска"> Краска </option>
+          {% for opt in range(option_ceiling|length) %}
+          <option id="{{ option_ceiling[opt][1] }}">{{ option_ceiling[opt][0] }}</option>
+          {% endfor %}
+
+        </select>
+      </div>
+
+<!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА -->
+
+                                <div id="select1_id1">
+                                  <div class="form-group col-md-7">
+                                    <label> Длина плитки </label>
+                                    <input type="text" class="form-control" id="length_potolPlit" placeholder="0.0 (м)" >
+                                </div> 
+                                <div class="form-group col-md-7">
+                                  <label> Ширина плитки</label>
+                                  <input type="text" class="form-control" id="width_potolPlit" placeholder="0.0 (м)" >
+                              </div> 
+                              <div class="form-group col-md-7">
+                                <label> Стоимость </label>
+                                <input type="text" class="form-control" id="price_potolPlit" placeholder=" (руб/м2)" >
+                              </div>
+                              <div class="">
+
+                                <p><label><input type="checkbox" name="sortament" value="1" id="galtel"> 
+                                  <span>Галтель<br />(потолочный плинтус)</span></label></p>
+
+                                <!-- <p><label><input type="checkbox" name="sortament" value="2" id="galtel"> 
+                                  <span>Галтель<br />(потолочный плинтус)</span></label></p> -->
+                                  
+                            
+                              </div>  
+                                </div>
+
+                                <div id="select1_id2">
+                                  <div class="form-group col-md-7">
+                                    <label> Нормативный <br /> расход краски </label>
+                                    <input type="text" class="form-control" id="rashod_kraska" placeholder="0.0 (л/м2)" >
+                                </div> 
+                              
+                              <div class="form-group col-md-7">
+                                <label> Стоимость </label>
+                                <input type="text" class="form-control" id="price_potolPlit" placeholder="0.0 (руб)" >
+                              </div>
+                              <div class="">
+                          
+                                <p><label><input type="checkbox" name="sortament" value="1" id="galtel"> 
+                                  <span>расчитать галтель<br />(потолочный плинтус)</span></label></p>
+                          
+                                <!-- <p><label><input type="checkbox" name="sortament" value="2" id="galtel"> 
+                                  <span>Галтель<br />(потолочный плинтус)</span></label></p> -->
+                                  
+                             
+                              </div>  
+                                </div>
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
+
+
+      <div class="form-group col-md-4">
+        <label> <b> Стена </b> </label>
+
+        <select v-model="select_wall" id="input_wall" class="form-control" name="select_5">
+          <option selected> Выбрать материал </option>
+          <option id="1" value="Обои"> Обои </option>
+          <option id="2" value="Плитка"> Плитка </option>
+          {% for opt in range(option_walls|length) %}
+          <option id="{{ option_walls[opt][1] }}">{{ option_walls[opt][0] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+<!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН -->
+                              <div id="select2_id1">
+                                  <div class="form-group col-md-7">
+                                    <label> Длина рулона </label>
+                                    <input type="text" class="form-control" id="length_potolPlit" placeholder="0.0 (м)" >
+                                  </div> 
+
+                                  <div class="form-group col-md-7">
+                                    <label> Ширина рулона</label>
+                                    <input type="text" class="form-control" id="width_potolPlit" placeholder="0.0 (м)" >
+                                  </div>
+
+                                  <div class="form-group col-md-7">
+                                    <label> Стоимость </label>
+                                    <input type="text" class="form-control" id="price_potolPlit" placeholder=" (руб/рул)" >
+                                  </div>
+
+                                  <!-- <div class="">
+                                    <p><label><input type="checkbox" name="sortament" value="1" id="galtel"> 
+                                      <span>Галтель<br />(потолочный плинтус)</span></label></p>
+                                  </div> -->
+
+                              </div>
+
+<!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН -->      
+
+      <div class="form-group col-md-4">
+        <label> <b> Пол </b> </label>
+
+        <select v-model="select_floor" id="input_floor" class="form-control" name="select_5">
+          <option selected="selected" disabled="disabled"> Выбрать материал </option>
+          <option id="1" value="Линолеум"> Линолеум </option>
+          <option id="2" value="Плитка"> Плитка </option>
+          <option id="3" value="Наливной пол"> Наливной пол </option>
+          {% for opt in range(option_floor|length) %}
+          <option id="{{ option_floor[opt][1] }}">{{ option_floor[opt][0] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      
+
+      <!-- <input type="text" id="www"> -->
+
+    </div>
+
+    <a href="#" class="button28" onclick="dublicateForm();" > Добавить комнату </a>
+    <a href="#" class="button28" onclick="square()" > Получить расчеты </a>
+
+
+    <div style="height: 50px;"></div>
+
+      </form>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+</div>
+
+
+<!-- <footer class="text-center text-lg-start text-white"
+            style="background-color: #1c2331; margin-top: 5.9%;" >
+</section>
+<section class="">
+<div class="container text-center text-md-start mt-5" style="height: 214px;">
+  <div class="row mt-3">
+    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"> -->
+ 
+      <!-- <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
+      <hr
+          class="mb-4 mt-0 d-inline-block mx-auto"
+          style="width: 60px; background-color: #FFCA18; height: 2px"
+          />
+      <p>
+        Данный продукт предназначен для реализации быстрых и точных расчётов строительно-ремонтных 
+        материалов и составления реестра.
+      </p>
+    </div>
+   
+    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> -->
+  
+      <!-- <h6 class="text-uppercase fw-bold">Наши продукты</h6>
+      <hr
+          class="mb-4 mt-0 d-inline-block mx-auto"
+          style="width: 60px; background-color: #FFCA18; height: 2px"
+          />
+      <p>
+        <a href="#!" class="text-white">Ремонтные расчеты материалов</a>
+      </p>
+      </p>
+    </div>
+  
+    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5"> -->
+ 
+      <!-- <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
+      <hr
+          class="mb-4 mt-0 d-inline-block mx-auto"
+          style="width: 60px; background-color: #FFCA18; height: 2px"
+          />
+      
+      <p>
+        <a href="#!" class="text-white">Советы</a>
+      </p>
+      <p>
+        <a href="#!" class="text-white">Помощь</a>
+      </p>
+      <p>
+        <a href="#!" class="text-white">Как измерять?</a>
+      </p>
+      <p>
+        <a href="#!" class="text-white">Статьи о ремонте</a>
+      </p>
+    </div>
+    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+      <h6 class="text-uppercase fw-bold">Контакты</h6>
+      <hr
+          class="mb-4 mt-0 d-inline-block mx-auto"
+          style="width: 60px; background-color: #FFCA18; height: 2px"
+          />
+      <p><i class="mr-3"></i> Тюмень, 625000, Россия</p>
+      <p><i class="mr-3"></i> PPM@mail.ru</p>
+      <p><i class="mr-3"></i> +7 992 333 22 22</p>
+      
+    </div>
+  </div>
+</div>
+</section> -->
+
+<!-- <div
+   class="text-center p-3"
+   style="background-color: rgba(0, 0, 0, 0.2)"
+   >
+© 2021 Copyright:
+<a class="text-white" href="https://PPM.ru/"
+   >PPM.ru</a>
+</div> -->
+
+
+
+<script src="../static/counter.js"></script>
+<script src="../static/Calculate.js"></script>
+<script src="../static/materials.js"></script>
+
+
+
+
+</body>
+</html>
