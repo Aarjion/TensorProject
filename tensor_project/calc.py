@@ -5,6 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 #from flask_login import login_required#, LoginManager#, UserMixin
 import hashlib
 from sqlalchemy import text
+import re
+
 
 app = Flask(__name__, template_folder="app/templates", static_folder="app/static/")
 app.config.from_object(__name__)
@@ -57,22 +59,23 @@ class Apartments(db.Model):
         self.square_floor_ceiling=square_floor_ceiling
 
 def get_materials():
-    sql = text("SELECT name_material FROM materials Where surfaces % 10 = 1 and auto = '0' ORDER BY name_material")
+    sql = text("SELECT name_material, units_measurement  FROM materials Where surfaces % 10 = 1 and auto = '0' ORDER BY name_material")
     db_materials_floor = db.session.execute(sql).all()
-    print (db_materials_floor)
 
-    sql = text("SELECT name_material FROM materials Where surfaces / 10 % 10 = 1 and auto = '0' ORDER BY name_material")
+    #for f in db_materials_floor:
+        #re.sub("(|)|,", "", f)
+
+    sql = text("SELECT name_material, units_measurement FROM materials Where surfaces / 10 % 10 = 1 and auto = '0' ORDER BY name_material")
     db_materials_walls = db.session.execute(sql).all()
-    print (db_materials_walls)
 
-    sql = text("SELECT name_material FROM materials Where surfaces / 100 = 1 and auto = '0' ORDER BY name_material")
+    sql = text("SELECT name_material, units_measurement FROM materials Where surfaces / 100 = 1 and auto = '0' ORDER BY name_material")
     db_materials_ceiling = db.session.execute(sql).all()
-    print (db_materials_ceiling)
-    return db_materials_ceiling
+
+    return db_materials_floor, db_materials_walls, db_materials_ceiling
 
 CORS(app)
 @app.route('/', methods=['POST', 'GET'])
-@app.route('/main')
+@app.route('/mainPage')
 def main():
     session['url'] = request.path
     return render_template('mainPage.html')
@@ -80,21 +83,13 @@ def main():
 @app.route('/counterPage', methods=['POST', 'GET'])
 def index(): 
     db_materials = get_materials()
-    
     session['result_authorization'] = 0
-
-    global selected
-    post = request.args.get('post', 0, type=int)
-    return json.dumps({'selected post': str(post)})
-
-    return render_template('counterPage.html', description=db_materials)
+    return render_template('counterPage.html', option_floor=db_materials[0], option_walls=db_materials[1], option_ceiling=db_materials[2])
 
 
 @app.route('/authorization')
 def auth():
     return render_template('authorization.html')
-
-
 
 
 @app.route('/authorization/submit', methods=['POST', 'GET'])
@@ -122,6 +117,7 @@ def auth_sub():
                 message = "Неверный логин или пароль"
 
     return render_template('authorization.html', message=message)
+
 
 @app.route('/registration', methods=['POST', 'GET'])
 def reg_sub():
@@ -162,6 +158,7 @@ def exit():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 @app.route('/main')
 def main():
     return render_template('mainPage.html')
