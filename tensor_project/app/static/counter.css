@@ -99,7 +99,11 @@ a.button28 {
 }
 
 
-
+#qw{
+    border: none;
+    outline: none;
+    outline-offset: 0;
+}
 
 
 

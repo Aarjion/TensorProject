@@ -19,6 +19,9 @@
 <body>
 
 <div id="app">
+
+
+
 <div class="header">
 
   <nav class="navbar navbar-expand-sm" id="nav1">
@@ -44,17 +47,17 @@
 
             <legend> <h5> ПАРАМЕТРЫ КОМНАТЫ </h5> </legend>
 
-            <div class="form-group col-md-1">
+             <div class="form-group col-md-1">
                 <label> Длина </label>
-                <input type="text" class="form-control" id="long_room" placeholder="0.0 (м)" required>
+                <input type="text" v-model.number="long_room" class="form-control" id="long_room" placeholder="0.0 (м)" required>
             </div> 
             <div class="form-group col-md-1">
                 <label> Ширина </label>
-                <input type="text" class="form-control" id="width_room" placeholder="0.0 (м)" required>
+                <input type="text" v-model.number="width_room" class="form-control" id="width_room" placeholder="0.0 (м)" required>
             </div>
             <div class="form-group col-md-1">
                 <label> Высота </label>
-                <input type="text" class="form-control" id="height_room" placeholder="0.0 (м)" required>
+                <input type="text" v-model.number="height_room" class="form-control" id="height_room" placeholder="0.0 (м)" required>
             </div>
 
         </div>
@@ -66,15 +69,15 @@
           <b> Дверь </b>
           <div class="form-group col-md-7">
               <label> Длина </label>
-              <input type="text" class="form-control" id="height_door" placeholder="0.0 (м)" >
+              <input type="text" v-bind:value="height_door" class="form-control" id="height_door" placeholder="0.0 (м)" >
           </div> 
           <div class="form-group col-md-7">
               <label> Ширина </label>
-              <input type="text" class="form-control" id="width_door" placeholder="0.0 (м)">
+              <input type="text" v-bind:value="width_door" class="form-control" id="width_door" placeholder="0.0 (м)">
           </div>
           <div class="form-group col-md-7">
             <label> Количество </label>
-            <input type="text" class="form-control" id="count_door" placeholder="1 (шт)">
+            <input type="text" v-bind:value="count_door" class="form-control" id="count_door" placeholder="1 (шт)">
           </div>
         </div>
 
@@ -82,15 +85,15 @@
           <b> Окно </b>
           <div class="form-group col-md-7">
               <label> Длина </label>
-              <input type="text" class="form-control" id="height_window" placeholder="0.0 (м)" >
+              <input type="text" v-bind:value="height_window" class="form-control" id="height_window" placeholder="0.0 (м)" >
           </div> 
           <div class="form-group col-md-7">
               <label> Ширина </label>
-              <input type="text" class="form-control" id="width_window" placeholder="0.0 (м)">
+              <input type="text" v-bind:value="width_window" class="form-control" id="width_window" placeholder="0.0 (м)">
           </div>
           <div class="form-group col-md-7">
             <label> Количество </label>
-            <input type="text" class="form-control" id="count_window" placeholder="1 (шт)">
+            <input type="text" v-bind:value="count_window" class="form-control" id="count_window" placeholder="1 (шт)">
           </div>
         </div>
 
@@ -214,31 +217,78 @@
         </select>
       </div>
 
-      
-
-      <!-- <input type="text" id="www"> -->
-
     </div>
-
-    <a href="#" class="button28" onclick="dublicateForm();" > Добавить комнату </a>
-    <a href="#" class="button28" onclick="square()" > Получить расчеты </a>
-
 
     <div style="height: 50px;"></div>
 
-      </form>
+<!-- 
+<div class="output_calculate">
+  <div class="form-row">
+    <div class="col-7" > 
+      <input type="text" class="form-control" id="qw" placeholder="City">
     </div>
 
-    
+    <div class="col">
+      <input type="text" class="form-control" placeholder="State">
+    </div>
+
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Zip">
+    </div>
+  </div>
+</div> -->
 
 
-
-
-
-
-
-
+        </form>
+    </div>
 </div>
+
+
+
+
+
+
+    
+<p v-if="wall_area">
+  Площадь стен: {{wall_area}} м<sup>2</sup>
+</p>
+<p v-if="floor_area">
+  Площадь пола и потолка: {{floor_area}} м<sup>2</sup>
+</p>
+<p v-if="plaster">
+  Количество штукатурки: {{plaster}} кг
+</p>
+<p v-if="cost_plaster">
+  Стоимость: {{cost_plaster}} руб.
+</p>
+</p>
+<p v-if="level_filling">
+  Количество выравнивающая шпатлёвки: {{level_filling}} кг
+</p>
+<p v-if="cost_level_filling">
+  Стоимость: {{cost_level_filling}} руб.
+</p>
+</p>
+<p v-if="finish_filling">
+  Количество финишной шпатлёвки: {{finish_filling}} кг
+</p>
+<p v-if="cost_finish_filling">
+  Стоимость: {{cost_finish_filling}} руб.
+</p>
+
+
+
+
+    <!-- <a href="#" class="button28" v-bind:onclick="dublicateForm" > Добавить комнату </a> -->
+    <a href="#" class="button28" v-on:click="square" > Получить расчеты </a>
+    <a href="#" class="button28" v-on:click="apartament_preparation" > Расчитать черновые работы</a>
+
+
+
+</div> 
+
+
+
 
 
 <!-- <footer class="text-center text-lg-start text-white"
@@ -322,17 +372,17 @@
 © 2021 Copyright:
 <a class="text-white" href="https://PPM.ru/"
    >PPM.ru</a>
-
-</div> -->
-
-
-
-<script src="../static/counter.js"></script>
-<script src="../static/Calculate.js"></script>
-<script src="../static/materials.js"></script>
+-->
 
 
 
 
 </body>
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="../static/counter.js"></script>
+<script src="../static/Calculate.js"></script>
+<script src="../static/materials.js"></script>
+
 </html>
