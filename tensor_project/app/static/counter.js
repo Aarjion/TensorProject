@@ -49,6 +49,7 @@ select2.onchange = function() {
   if( selectedId == '1' ) {
     document.getElementById('select2_id1').style.display = 'block';
     document.getElementById('select2_id2').style.display = 'none';
+    document.get
   }
 
 

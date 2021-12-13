@@ -47,7 +47,7 @@
 
             <legend> <h5> ПАРАМЕТРЫ КОМНАТЫ </h5> </legend>
 
-             <div class="form-group col-md-1">
+            <p></p><p></p> <div class="form-group col-md-1">
                 <label> Длина </label>
                 <input type="text" v-model.number="long_room" class="form-control" id="long_room" placeholder="0.0 (м)" required>
             </div> 
@@ -69,15 +69,15 @@
           <b> Дверь </b>
           <div class="form-group col-md-7">
               <label> Длина </label>
-              <input type="text" v-bind:value="height_door" class="form-control" id="height_door" placeholder="0.0 (м)" >
+              <input type="text" v-model.number="height_door" class="form-control" id="height_door" placeholder="0.0 (м)" >
           </div> 
           <div class="form-group col-md-7">
               <label> Ширина </label>
-              <input type="text" v-bind:value="width_door" class="form-control" id="width_door" placeholder="0.0 (м)">
+              <input type="text" v-model.number="width_door" class="form-control" id="width_door" placeholder="0.0 (м)">
           </div>
           <div class="form-group col-md-7">
             <label> Количество </label>
-            <input type="text" v-bind:value="count_door" class="form-control" id="count_door" placeholder="1 (шт)">
+            <input type="text" v-model.number="count_door" class="form-control" id="count_door" placeholder="1 (шт)">
           </div>
         </div>
 
@@ -85,15 +85,15 @@
           <b> Окно </b>
           <div class="form-group col-md-7">
               <label> Длина </label>
-              <input type="text" v-bind:value="height_window" class="form-control" id="height_window" placeholder="0.0 (м)" >
+              <input type="text" v-model.number="height_window" class="form-control" id="height_window" placeholder="0.0 (м)" >
           </div> 
           <div class="form-group col-md-7">
               <label> Ширина </label>
-              <input type="text" v-bind:value="width_window" class="form-control" id="width_window" placeholder="0.0 (м)">
+              <input type="text" v-model.number="width_window" class="form-control" id="width_window" placeholder="0.0 (м)">
           </div>
           <div class="form-group col-md-7">
             <label> Количество </label>
-            <input type="text" v-bind:value="count_window" class="form-control" id="count_window" placeholder="1 (шт)">
+            <input type="text" v-model.number="count_window" class="form-control" id="count_window" placeholder="1 (шт)">
           </div>
         </div>
 
@@ -106,13 +106,12 @@
 
       <div class="form-group col-md-4">
         <label> <b> Потолок </b> </label>
-        <a class="label label-primary"  onclick="myFunction({very:id})" > Compare</a>
 
-
-        <select v-model="select_ceiling" id="input_ceiling" class="form-control" name="select">
-          <option>Выбрать материал</option>
-          <option id="1" value="Потолочная плитка"> Потолочная плитка </option>
-          <option id="2" value="Краска"> Краска </option>
+        <select  v-model="select_ceiling" id="input_ceiling" class="form-control" name="select">
+          <option value="0" selected>Выбрать материал</option>
+          {% for opt in range(option_ceiling|length) %}
+          <option value="{{ option_ceiling[opt][2] }}">{{ option_ceiling[opt][1] }}</option>
+          {% endfor %}
 
         </select>
       </div>
@@ -174,9 +173,10 @@
         <label> <b> Стена </b> </label>
 
         <select v-model="select_wall" id="input_wall" class="form-control" name="select_5">
-          <option selected> Выбрать материал </option>
-          <option id="1" value="Обои"> Обои </option>
-          <option id="2" value="Плитка"> Плитка </option>
+          <option value="0" selected> Выбрать материал </option>
+          {% for opt in range(option_walls|length) %}
+          <option value="{{ option_walls[opt][2] }}">{{ option_walls[opt][1] }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -210,10 +210,10 @@
         <label> <b> Пол </b> </label>
 
         <select v-model="select_floor" id="input_floor" class="form-control" name="select_5">
-          <option selected="selected" disabled="disabled"> Выбрать материал </option>
-          <option id="1" value="Линолеум"> Линолеум </option>
-          <option id="2" value="Плитка"> Плитка </option>
-          <option id="3" value="Наливной пол"> Наливной пол </option>
+          <option value="0" selected> Выбрать материал </option>
+          {% for opt in range(option_floor|length) %}
+          <option value="{{ option_floor[opt][2] }}">{{ option_floor[opt][1] }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -247,44 +247,36 @@
 
 
 
-
     
 <p v-if="wall_area">
-  Площадь стен: {{wall_area}} м<sup>2</sup>
+  Площадь стен: [[wall_area]] м<sup>2</sup>
 </p>
 <p v-if="floor_area">
-  Площадь пола и потолка: {{floor_area}} м<sup>2</sup>
+  Площадь пола и потолка: [[floor_area]] м<sup>2</sup>
 </p>
-<p v-if="plaster">
-  Количество штукатурки: {{plaster}} кг
+<p v-if="calc_number">
+  Количество штукатурки: [[calc_number]] кг
 </p>
 <p v-if="cost_plaster">
-  Стоимость: {{cost_plaster}} руб.
+  Стоимость: [[cost_plaster]] руб.
 </p>
 </p>
 <p v-if="level_filling">
-  Количество выравнивающая шпатлёвки: {{level_filling}} кг
+  Количество выравнивающая шпатлёвки: [[level_filling]] кг
 </p>
 <p v-if="cost_level_filling">
-  Стоимость: {{cost_level_filling}} руб.
+  Стоимость: [[cost_level_filling]] руб.
 </p>
 </p>
 <p v-if="finish_filling">
-  Количество финишной шпатлёвки: {{finish_filling}} кг
+  Количество финишной шпатлёвки: [[finish_filling]] кг
 </p>
 <p v-if="cost_finish_filling">
-  Стоимость: {{cost_finish_filling}} руб.
+  Стоимость: [[cost_finish_filling]] руб.
 </p>
 
-
-
-
-    <!-- <a href="#" class="button28" v-bind:onclick="dublicateForm" > Добавить комнату </a> -->
-    <a href="#" class="button28" v-on:click="square" > Получить расчеты </a>
-    <a href="#" class="button28" v-on:click="apartament_preparation" > Расчитать черновые работы</a>
-
-
-
+    <a href="#" class="button28" v-bind:onclick="dublicateForm" > Добавить комнату </a>
+    <a href="#" class="button28" v-on:click="full_calc" > Получить расчеты </a> 
 </div> 
 
 
@@ -383,6 +375,5 @@
 <script src="https://unpkg.com/vue@next"></script>
 <script src="../static/counter.js"></script>
 <script src="../static/Calculate.js"></script>
-<script src="../static/materials.js"></script>
 
 </html>

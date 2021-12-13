@@ -1,8 +1,9 @@
-
 const App = {
     el: "app",
+    delimiters: ['[[', ']]'],
+
     data() {
-        return{
+        return {
             long_room: null,
             width_room: null,
             height_room: null,
@@ -12,37 +13,17 @@ const App = {
             height_window: null,
             width_window: null,
             count_window: null,
-            // space_area: null,
-            // length_part: null,
-            // width_part: null,
-            // number_in_packeging: null,
-            // price: null,
-            // price_paint: null,
-            // width_wallpaper: null,
-            // price_wallpaper: null,
-            // length_tile_wall: null,
-            // width_tile_wall: null,
-            // number_tiles_box_wall: null,
-            // price_tiles_wall: null,
-            // length_panel: null,
-            // width_panel: null,
-            // number_panels_box: null,
-            // price_panela: null,
-            // width_linol: null,
-            // price_linol: null,
-            // length_lamin: null,
-            // width_lamin: null,
-            // number_lamin_box: null,
-            // price_lamin: null,
-            // length_tile_floor: null,
-            // width_tile_floor: null,
-            // number_tile_floor_box: null,
-            // price_tile_floor: null,
-            // price_paint_ceil: null,
-            // length_dekor_tiles: null,
-            // width_dekor_tiles: null,
-            // number_dekor_tiles_box: null,
-            // price_dekor_tiles: null,
+            width_material: null,
+            price_material: null,
+            raport: null,
+            length_plint: null,
+            space_area: null,
+            length_part: null,
+            width_part: null,
+            number_in_packeging: null,
+            price_paint: null,
+            width_wallpaper: null,
+            price_wallpaper: null,
 
 
 
@@ -59,174 +40,136 @@ const App = {
             filling_floor: null,
             cost_filling_floor: null,
             coupler: null,
-            cost_coupler: null
-            // number_packegs: null,
-            // cost: null,
-            // number_paint: null,
-            // cost_paint: null,
-            // number_roll: null,
-            // cost_wallpaper: null,
-            // glue: null,
-            // cost_glue: null,
-            // number_tiles_wall: null,
-            // cost_tiles_wall: null,
-            // number_panels_wall: null,
-            // cost_panels_wall: null,
-            // length_list: null,
-            // cost_linol: null,
-            // number_lamin: null,
-            // cost_lamin: null,
-            // number_tail_floor: null,
-            // cost_tail_floor: null,
-            // paint_ceil: null,
-            // cost_paint_ceil: null,
-            // number_dekor_tiles: null,
-            // cost_dekor_tiles: null
+            cost_coupler: null,
+            number_items: null,
+            number_roll: null,
+            cost_wallpaper: null,
+            number_paint: null,
+            cost_paint: null,
+            length_list: null,
+            cost_material: null,
+            calc_number: null,
+            cost: null
         }
     },
     methods: {
         square() {
             ///   #///     Неактивная площадь комнаты  ###
-            var ne_s = (this.height_window * this.width_window) * this.count_window + (this.height_door * this.width_door) * this.count_door
+            let ne_s = (this.height_window * this.width_window) * this.count_window + (this.height_door * this.width_door) * this.count_door
 
 //   #///     Рабочая площадь стен ###
             this.wall_area = 2 * (this.long_room * this.height_room) + 2 * (this.width_room * this.height_room) - ne_s
 
 //   #///     Площадь пол/потолок ###
             this.floor_area = this.long_room * this.width_room
-
         },
-        apartament_preparation() {
-            ///   ##########///   Cтены ###############
-            ///    Расчёт Штукатурки
-            this.plaster = this.wall_area * 1 * 0.9
-            this.cost_plaster = 14 * this.plaster
 
 
-            ///   Расчёт Шпатлёвка (в кг)
-            this.level_filling = this.wall_area * 4.5 * 0.5
-            this.finish_filling = this.wall_area * 1 * 0.2
-            this.cost_level_filling = 43 * this.level_filling
-            this.cost_finish_filling = 40 * this.finish_filling
+
+        get_res(unit, area, thickness, consumption, weight, width_room, width_material, long_room, height_room,
+                price_material, length_part, width_part, number_in_packeging,
+                raport, length_plint) {
 
 
-            ///   Грунтовка (в кг)
-            this.primer = this.wall_area * 0.16
-            this.cost_primer = 84 * this.primer
+            if (unit == "кг") {
+                // Площадь * Толщину слоя * Расход на 1м2 = количестов в кг
+                let calc_number = Math.ceil(area * thickness * consumption)
+                // Цена за мешок / кг в мешке * Количество
+                let cost = (price_material / weight) * calc_number
+                return {calc_number: calc_number, cost: cost}//"кг"
 
 
-            ///   ########///   Потолок ###########
-            this.filling_floor = this.floor_area * 1 * 0.2
-            this.cost_filling_floor = 40 * this.filling_floor
+            } else if (unit == "м.п.") {
+                let number_list = width_room / width_material
+                let length_list = parseFloat((long_room * number_list).toFixed(2) ) ///   в метрах погонных
+                let cost_material = length_list * price_material
+
+                return {length_list: length_list, cost_material: cost_material}// "м_погон"
 
 
-            ///   ########///   Пол ##########
-            ///   Стяжка (в кг)
-            this.coupler = this.floor_area * 0.3 * 33
-            this.cost_coupler = this.coupler * 17
+            } else if (unit == "шт") {
+                let value_area = area + (area * 0.05)
+                let part_area = (length_part * width_part)
+                let number_parts = value_area / part_area  ///   Штук  (не упаковок)
+                let number_packegs = Math.ceil(number_parts / number_in_packeging)  ///   Количество упаковок
+                let cost = number_packegs * price_material
+
+                return {number_packegs: number_packegs, cost: cost} // "шт"
 
 
+            } else if (unit == "л") {
+                let number_paint = parseFloat((area / weight).toFixed(2))
+                let cost_paint = price_material * number_paint
+
+                return {number_paint: number_paint, cost_paint: cost_paint}  //"л"
+            } 
+            else if (unit == "рул") {
+                let number_roll = 0
+                let checkbox_stik_p = true
+                if (raport == null) {
+                    number_roll = Math.ceil(((long_room + width_room) * 2 / width_material) * height_room / 10)
+                } else {
+                    if (checkbox_stik_p == true) {
+                        number_roll = Math.ceil(((long_room + width_room) * 2 / width_material) * (height_room + raport) / 10)
+
+                    } else {
+                        number_roll = Math.ceil(((long_room + width_room) * 2 / width_material) * (height_room + 1.5 * raport) / 10)
+                    }
+                }
+                let cost_wallpaper = price_material * number_roll
+
+                return {number_roll: number_roll, cost_wallpaper: cost_wallpaper}   //"рул"
+
+            } else if (unit == "м") {
+                let number_items = (2 * long_room + 2 * width_room) / length_plint
+                return {number_items: number_items}// "шт для м"
+
+            } 
+            else if (unit == "м2") {
+                let length_list = parseFloat((area / 2.6).toFixed(2))
+                let cost_material = length_list * price_material
+
+                return {length_list: length_list, cost_material: cost_material}// "м_погон"
+            }
+                else return 0
         },
-//         calculate_quantity(space_area, length_part, width_part, number_in_packeging) {
-//             let value_area = space_area + (space_area * 0.05)
-//             let part_area = (length_part * width_part) / 10000
-//             let number_parts = value_area / part_area  ///   Штук  (не упаковок)
-//             let number_packegs = number_parts / number_in_packeging  ///   Количество упаковок
-//             let cost = number_packegs * price
-//             let object = Object.create({}, {number_packegs: {number_packegs}, cost: {cost}})
-//             return object
-//         },
-//         material_sten() {
-//             ///   Краска (в л)
-//             if (checkbox_paint == true) {
-//                 this.number_paint = this.wall_area / 10
-//                 this.cost_paint = this.price_paint * this.number_paint
-//             }///   Обои
-//             if (checkbox_oboi == true) {
-//                 ///   if checkbox_raport == False {
-// ///       number_roll = ((length_room + width_room) * 2 / width_wallpaper) * height_room / 10)  ///   Ко-во рулонов
-// ///   else
-// ///       if checkbox_stik_p == true
-// ///           number_roll = ((length_room + width_room) * 2 / width_wallpaper) * (height_room + raport) / 10)
-// ///       elif checkbox_stik_s == true
-// ///           number_roll = ((length_room + width_room) * 2 / width_wallpaper) * (height_room + 1.5 * raport) / 10)
 
-//                 this.number_roll = ((this.long_room + this.width_room) * 2 / this.width_wallpaper) * this.height_room / 10  ///   Ко-во рулонов
-//                 this.cost_wallpaper = this.price_wallpaper * this.number_roll
-
-//                 ///   Клей в кг
-//                 this.glue = this.wall_area * 0.3
-//                 this.cost_glue = 2 * this.glue
-//             }
-//             ///   Плитка
-//             if (checkbox_tiles_wall == true) {
-//                 this.number_tiles_wall.number_packegs,
-//                     this.cost_tiles_wall.cost = this.calculate_quantity(this.wall_area, this.length_tile_wall, this.width_tile_wall,
-//                         this.number_tiles_box_wall, this.price_tiles_wall)
-//             }
-//             ///   Панели
-//             if (checkbox_panels_wall == true) {
-//                 this.number_panels_wall.number_packegs,
-//                     this.cost_panels_wall.cost = this.calculate_quantity(this.wall_area, this.length_panel, this.width_panel,
-//                         this.number_panels_box, this.price_panela)
-//             }
-//         },
-//         material_pol() {
-
-// ///   Линолеум
-//             if (checkbox_lin == true) {
-//                 this.number_list = this.width_room / this.width_linol
-//                 this.length_list = this.length_room * this.number_list  ///   в метрах погонных
-//                 this.cost_linol = this.length_list * this.price_linol
-//             }
+        full_calc() {
+            this.square()
+            let material_ceiling = document.getElementById("input_ceiling").value;
+            let material_floor = document.getElementById("input_floor").value;
+            let material_walls = document.getElementById("input_wall").value;
 
 
-// ///   Ламинат
-//             if (checkbox_lamin == true) {
-//                 this.number_lamin.number_packegs, this.cost_lamin.cost = this.calculate_quantity(this.floor_area,
-//                     this.length_lamin, this.width_lamin, this.number_lamin_box.cost, this.price_lamin)
+            if (material_floor != 0) {
+                let obj_floor = this.get_res(material_floor, this.floor_area, 0.4, 33, 30,
+                    this.width_room, this.width_material, this.long_room, this.height_room, this.price_material = 1000,
+                    this.length_part = 1.2, this.width_part = 0.4, this.number_in_packeging = 10, 
+                     this.raport, this.length_plint)
+                console.log(obj_floor)
 
-//             }
+            }
 
-// ///   Плитка
-//             if (checkbox_tail_floor == true) {
-//                 this.number_tail_floor.number_packegs, this.cost_tail_floor.cost = this.calculate_quantity(this.floor_area,
-//                     this.length_tile_floor, this.width_tile_floor, this.number_tile_floor_box, this.price_tile_floor)
-//             }
-//         },
-//         material_potolok() {
 
-// ///   Краска (в л)
-//             if (checkbox_tail_floor == true) {
-//                 this.paint_ceil = this.floor_area / 10
-//                 this.cost_paint_ceil = this.price_paint_ceil * this.paint_ceil
+            if (material_ceiling != 0) {
+                let obj_ceiling =  this.get_res(material_ceiling, this.floor_area, 0.4, 33, 30,
+                    this.width_room, this.width_material, this.long_room, this.height_room, this.price_material = 1000,
+                 this.length_part = 1, this.width_part = 0.5, this.number_in_packeging = 10,
+                     this.raport, this.length_plint)
+                console.log(obj_ceiling)
 
-//             }
-// //        ///   Декоративные плиты
-//             if (checkbox_dekor_tiles == true) {
-//                 this.number_dekor_tiles.number_packegs, this.cost_dekor_tiles.cost = this.calculate_quantity(this.floor_area,
-//                     this.length_dekor_tiles, this.width_dekor_tiles, this.number_dekor_tiles_box, this.price_dekor_tiles)
-//             }
-//         }
+            }
+
+
+            if (material_walls != 0) {
+                let obj_walls = this.get_res(material_walls, this.wall_area, 0.1, 2, 30,
+                    this.width_room, this.width_material = 1, this.long_room, this.height_room, this.price_material = 1000,
+                     this.length_part = 2.5, this.width_part = 0.2, this.number_in_packeging = 10,
+                     this.raport = 0.35, this.length_plint)
+                console.log(obj_walls)
+            }
+        }
     }
 };
 
-
 Vue.createApp(App).mount('#app')
-
-
-
-//
-// function calculate(){
-//     var wall_area, floor_area = square()
-//     apartament_preparation()
-//     if (check_na_stenu == true){
-//         material_sten()
-//     }
-//     if (check_na_pol == true){
-//         material_pol()
-//     }
-//     if (check_na_potolok == true){
-//         material_potolok()
-//     }
-// }
