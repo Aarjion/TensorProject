@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 import hashlib
 from sqlalchemy import text
 import re
-
+  
 
 app = Flask(__name__, template_folder="app/templates", static_folder="app/static/")
 app.config.from_object(__name__)
@@ -59,16 +59,13 @@ class Apartments(db.Model):
         self.square_floor_ceiling=square_floor_ceiling
 
 def get_materials():
-    sql = text("SELECT name_material, units_measurement  FROM materials Where surfaces % 10 = 1 and auto = '0' ORDER BY name_material")
+    sql = text("SELECT id, name_material, units_measurement  FROM materials Where surfaces % 10 = 1 and auto = '0' ORDER BY name_material")
     db_materials_floor = db.session.execute(sql).all()
 
-    #for f in db_materials_floor:
-        #re.sub("(|)|,", "", f)
-
-    sql = text("SELECT name_material, units_measurement FROM materials Where surfaces / 10 % 10 = 1 and auto = '0' ORDER BY name_material")
+    sql = text("SELECT id, name_material, units_measurement FROM materials Where surfaces / 10 % 10 = 1 and auto = '0' ORDER BY name_material")
     db_materials_walls = db.session.execute(sql).all()
 
-    sql = text("SELECT name_material, units_measurement FROM materials Where surfaces / 100 = 1 and auto = '0' ORDER BY name_material")
+    sql = text("SELECT id, name_material, units_measurement FROM materials Where surfaces / 100 = 1 and auto = '0' ORDER BY name_material")
     db_materials_ceiling = db.session.execute(sql).all()
 
     return db_materials_floor, db_materials_walls, db_materials_ceiling
@@ -77,13 +74,11 @@ CORS(app)
 @app.route('/', methods=['POST', 'GET'])
 @app.route('/mainPage')
 def main():
-    session['url'] = request.path
     return render_template('mainPage.html')
 
 @app.route('/counterPage', methods=['POST', 'GET'])
 def index(): 
     db_materials = get_materials()
-    session['result_authorization'] = 0
     return render_template('counterPage.html', option_floor=db_materials[0], option_walls=db_materials[1], option_ceiling=db_materials[2])
 
 
@@ -103,7 +98,7 @@ def auth_sub():
         if username == res.login:
             check_password_bd = res.password
             new_key = hashlib.md5(password.encode()).hexdigest()
-            if(new_key  == check_password_bd):
+            if(new_key  == check_password_bd): 
                 session['result_authorization'] = 1
                 session['user'] = username
                 session.modified = True
@@ -111,40 +106,43 @@ def auth_sub():
                 if(session['url'] == "/account"):
                     session['url'] = ""
                     return render_template('account.html')
-            else:
+            else: 
                 session['result_authorization'] = 0
                 session.modified = True
                 message = "Неверный логин или пароль"
 
+
     return render_template('authorization.html', message=message)
 
+@app.route('/registration')
+def reg():
+    return render_template('registration.html')
 
-@app.route('/registration', methods=['POST', 'GET'])
+@app.route('/registration/submit', methods=['POST', 'GET'])
 def reg_sub():
     message = ''
-    username = request.form.get('login')
-    password = request.form.get('pass')
-    if(username is  None and password is  None):
-        return render_template('registration.html')
+    username = request.form.get('check_login')
+    password = request.form.get('check_pass')
+    if(username is None and password is  None):
+        message = 'Введите данные'
     else:
         hash_object = hashlib.md5(password.encode()).hexdigest()
         try: 
             user = User(login=username, password=hash_object)
             db.session.add(user)
             db.session.commit()
-
+ 
         except Exception:
             message="Такой пользователь уже существует"
         else:
             message = "Пользователь зарегистрирован"
-        return render_template('registration.html', message=message)
-
+    return render_template('registration.html', message=message)
 
 
 @app.route('/account')
 def account():
-    if(session['result_authorization'] == 1):
-        return render_template('account.html')
+    if('result_authorization' in session and session['result_authorization'] == 1):
+        return render_template('account.html') 
     else:
         message="Авторизуйтесь для входа в личный кабинет"
         session['url'] = request.path
@@ -156,9 +154,37 @@ def exit():
     session['user'] = ''
     return render_template('counterPage.html')
 
+
+@app.route('/save', methods=['POST', 'GET'])
+def save():
+    message = ''
+    username = request.form.get('name_room')
+    password = request.form.get('check_pass')
+    try: 
+        apartment = Apartments(id = session['user'],
+    name_room = request.form.get('name_room'),
+    id_materials_ceiling = username,
+    id_tools_ceiling = username,
+    id_materials_floor = username,
+    id_tools_floor = username,
+    id_materials_walls = username,
+    id_tools_walls = username,
+    id_auto_material = username,
+    id_tools_auto_material = username,
+    square_walls = username,
+    square_floor_ceiling = username)
+
+        db.session.add(apartment)
+        db.session.commit()
+
+    except Exception:
+        message="Ошибка при сохранении"
+    else:
+        message = "Успешно"
+    return render_template('account.html', message=message)
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
 
-@app.route('/main')
-def main():
-    return render_template('mainPage.html')
+  

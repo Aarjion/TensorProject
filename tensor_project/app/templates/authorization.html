@@ -18,6 +18,9 @@
         <nav class="navbar navbar-expand-sm" id="nav1">
             <a class="navbar-brand" href="/mainPage"><img src="../static/resourses/img/PPM1.png" style="height: 40px; padding-left: 15%;"></a>
             <a class="navbar" href="/account" ><img src="../static/resourses/img/account.png" style="height: 40px; margin-left: 2900%;"></a>
+            {% if session['user']%}
+            <a class="navbar" href="/exit" >Выход</a>
+            {% endif %}
           </nav>
     </div>
 
@@ -48,7 +51,9 @@
                 </div>
                 <span class="text">Запомнить</span>
                 <button type="submit" class="btn btn-default">ВХОД</button> 
-                <button type="submit" class="btn btn-default">Регистрация</button>
+                <!--<button type="submit" class="btn btn-default">Регистрация</button>-->
+                <a href="/registration">Регистрация</a>
+
                 </div>
                 </form>
                 </div>

@@ -23,7 +23,7 @@
 }
 #block2{
     padding-left: 20%;
-    margin-top: -22%;
+    margin-top: -20.5%;
     display: flex;
     flex-direction: row;
     
@@ -31,7 +31,7 @@
 #block3{
     padding-left: 50%;
     padding-right: 2%;
-    margin-top: -22%;
+    margin-top: -22.1%;
     display: flex;
     flex-direction: row;
 }
@@ -99,11 +99,7 @@ a.button28 {
 }
 
 
-#qw{
-    border: none;
-    outline: none;
-    outline-offset: 0;
-}
+
 
 
 

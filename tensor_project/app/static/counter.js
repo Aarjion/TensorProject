@@ -14,16 +14,16 @@ select.onchange = function() {
   var indexSelected = select.selectedIndex,
       option = select.querySelectorAll('option')[indexSelected];
       
-  var selectedId = option.getAttribute('id');
-  
-  if( selectedId == '1' ) {
-    
+  var selected_val = option.getAttribute('value');
+  selected_val = document.getElementById("input_ceiling").value;
+  console.log(selected_val)
+  if( selected_val == "шт" ) {
     document.getElementById('select1_id1').style.display = 'block';
     document.getElementById('select1_id2').style.display = 'none';
   }
 
 
-  if( selectedId == '2' ) 
+  if( selected_val == "м" ) 
   {
     document.getElementById('select1_id2').style.display = 'block';
     document.getElementById('select1_id1').style.display = 'none';
@@ -31,10 +31,10 @@ select.onchange = function() {
   } 
 
 
-  // if( selectedId == '3' ) alert(3);
-  // if( selectedId == '4' ) alert(4);
-  // if( selectedId == '5' ) alert(5);
-  // if( selectedId == '6' ) alert(6);
+  // if( selected_val == '3' ) alert(3);
+  // if( selected_val == '4' ) alert(4);
+  // if( selected_val == '5' ) alert(5);
+  // if( selected_val == '6' ) alert(6);
 };
 
 
@@ -49,7 +49,6 @@ select2.onchange = function() {
   if( selectedId == '1' ) {
     document.getElementById('select2_id1').style.display = 'block';
     document.getElementById('select2_id2').style.display = 'none';
-    document.get
   }
 
 
