@@ -221,24 +221,6 @@
 
     <div style="height: 50px;"></div>
 
-<!-- 
-<div class="output_calculate">
-  <div class="form-row">
-    <div class="col-7" > 
-      <input type="text" class="form-control" id="qw" placeholder="City">
-    </div>
-
-    <div class="col">
-      <input type="text" class="form-control" placeholder="State">
-    </div>
-
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Zip">
-    </div>
-  </div>
-</div> -->
-
-
         </form>
     </div>
 </div>
@@ -246,44 +228,52 @@
 
 
 
+<div id="output1" style="text-align: center;">
 
-    
+ <h3> Cписок расчетов </h3>
+
 <p v-if="wall_area">
-  Площадь стен: [[wall_area]] м<sup>2</sup>
+  Площадь стен: <span class="output_value"> [[wall_area]] м<sup>2</sup> </span>
 </p>
 <p v-if="floor_area">
-  Площадь пола и потолка: [[floor_area]] м<sup>2</sup>
+  Площадь пола и потолка: <span class="output_value"> [[floor_area]] м<sup>2</sup>  </span>
 </p>
 <p v-if="calc_number">
-  Количество штукатурки: [[calc_number]] кг
+  Количество штукатурки: <span class="output_value">[[calc_number]] кг  </span>
 </p>
 <p v-if="cost_plaster">
-  Стоимость: [[cost_plaster]] руб.
+  Стоимость: <span class="output_value"> [[cost_plaster]] руб.  </span>
 </p>
 </p>
 <p v-if="level_filling">
-  Количество выравнивающая шпатлёвки: [[level_filling]] кг
+  Количество выравнивающая шпатлёвки: <span class="output_value"> [[level_filling]] кг  </span>
 </p>
 <p v-if="cost_level_filling">
-  Стоимость: [[cost_level_filling]] руб.
+  Стоимость: <span class="output_value"> [[cost_level_filling]] руб.  </span>
 </p>
 </p>
 <p v-if="finish_filling">
-  Количество финишной шпатлёвки: [[finish_filling]] кг
+  Количество финишной шпатлёвки: <span class="output_value"> [[finish_filling]] кг  </span>
 </p>
 <p v-if="cost_finish_filling">
-  Стоимость: [[cost_finish_filling]] руб.
+  Стоимость: <span class="output_value"> [[cost_finish_filling]] руб.  </span>
 </p>
 
+
+<a href="#" class="button28" v-on:click="full_calc" > Скачать Excel </a>
+
+</div>
+
     <a href="#" class="button28" v-bind:onclick="dublicateForm" > Добавить комнату </a>
-    <a href="#" class="button28" v-on:click="full_calc" > Получить расчеты </a> 
+    <a href="#" class="button28" v-on:click="full_calc" > Получить расчеты </a>
+    <!-- <a href="#" class="button28" v-on:click="get_res" > Получить черновые расчеты </a> -->
 </div> 
 
 
 
 
 
-<!-- <footer class="text-center text-lg-start text-white"
+<footer class="text-center text-lg-start text-white"
             style="background-color: #1c2331; margin-top: 5.9%;" >
 </section>
 
@@ -292,9 +282,9 @@
 
   <div class="row mt-3">
 
-    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"> -->
+    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
  
-      <!-- <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
+      <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -305,9 +295,9 @@
       </p>
     </div>
    
-    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> -->
+    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
   
-      <!-- <h6 class="text-uppercase fw-bold">Наши продукты</h6>
+      <h6 class="text-uppercase fw-bold">Наши продукты</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -318,9 +308,9 @@
       </p>
     </div>
   
-    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5"> -->
+    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5">
  
-      <!-- <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
+      <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -355,16 +345,16 @@
   </div>
 
 </div>
-</section> -->
+</section> 
 
-<!-- <div
+  <div
    class="text-center p-3"
    style="background-color: rgba(0, 0, 0, 0.2)"
-   >
+   > 
 © 2021 Copyright:
 <a class="text-white" href="https://PPM.ru/"
    >PPM.ru</a>
--->
+
 
 
 

@@ -140,6 +140,7 @@ const App = {
             let material_floor = document.getElementById("input_floor").value;
             let material_walls = document.getElementById("input_wall").value;
 
+            document.getElementById('output1').style.display = 'block';
 
             if (material_floor != 0) {
                 let obj_floor = this.get_res(material_floor, this.floor_area, 0.4, 33, 30,
