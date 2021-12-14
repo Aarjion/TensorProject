@@ -39,7 +39,7 @@
 
 a.button28 {
     margin-left: 1%;
-    margin-top: 5%;
+    margin-top: 14%;
     position: relative;
     display: inline-block;
     font-size: 90%;
@@ -73,29 +73,26 @@ a.button28 {
 /* ПРО ИНПУТЫ ДЛЯ МАТЕРИАЛОВ */
 
 /* ПОТОЛОК *//* ПОТОЛОК *//* ПОТОЛОК *//* ПОТОЛОК *//* ПОТОЛОК */
-#select1_id1 {
-    display: none;
-    margin-top: 10%;
-    margin-left: -34%;
-}
-
-#select1_id2 {
+#select1_id1,#select1_id2, #select1_id3, #select1_id4 {
     display: none;
     margin-top: 10%;
     margin-left: -34%;
 }
 
 /* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ */
-#select2_id1 {
+#select2_id1, #select2_id2, #select2_id3, #select2_id4 {
     display: none;
     margin-top: 10%;
-    margin-left: -34%;
+    margin-left: 0%;
 }
-
-#select2_id2 {
+#div_raport_true{ 
+    display: none;
+}
+/* ПОЛ *//* ПОЛ *//* ПОЛ *//* ПОЛ *//* ПОЛ *//* ПОЛ */
+#select3_id1, #select3_id2, #select3_id3 {
     display: none;
     margin-top: 10%;
-    margin-left: -34%;
+    margin-left: 30%;
 }
 
 #output1{
@@ -123,6 +120,10 @@ p{
     float: right;
     margin-right: 1%;
 }
+
+
+
+
 
 
 

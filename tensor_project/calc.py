@@ -81,11 +81,9 @@ def index():
     db_materials = get_materials()
     return render_template('counterPage.html', option_floor=db_materials[0], option_walls=db_materials[1], option_ceiling=db_materials[2])
 
-
 @app.route('/authorization')
 def auth():
     return render_template('authorization.html')
-
 
 @app.route('/authorization/submit', methods=['POST', 'GET'])
 def auth_sub():
@@ -110,7 +108,6 @@ def auth_sub():
                 session['result_authorization'] = 0
                 session.modified = True
                 message = "Неверный логин или пароль"
-
 
     return render_template('authorization.html', message=message)
 
@@ -138,7 +135,6 @@ def reg_sub():
             message = "Пользователь зарегистрирован"
     return render_template('registration.html', message=message)
 
-
 @app.route('/account')
 def account():
     if('result_authorization' in session and session['result_authorization'] == 1):
@@ -147,6 +143,7 @@ def account():
         message="Авторизуйтесь для входа в личный кабинет"
         session['url'] = request.path
         return render_template('authorization.html', message=message)
+
 
 @app.route('/exit')
 def exit():

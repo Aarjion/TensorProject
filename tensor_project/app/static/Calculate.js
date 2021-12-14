@@ -13,22 +13,29 @@ const App = {
             height_window: null,
             width_window: null,
             count_window: null,
-            width_material: null,
-            price_material: null,
             raport: null,
-            length_plint: null,
-            space_area: null,
-            length_part: null,
-            width_part: null,
-            number_in_packeging: null,
-            price_paint: null,
-            width_wallpaper: null,
-            price_wallpaper: null,
-
+            raport_true: null,
+            long_raport: null,
+            rashod_kraska_floor: null,
+            price_floor: null,
+            length_part_floor: null,
+            width_part_floor: null,
+            rashod_kraska_ceiling: null,
+            price_ceiling: null,
+            length_part_ceiling: null,
+            width_part_ceiling: null,
+            rashod_kraska_walls: null,
+            price_walls: null,
+            length_part_walls: null,
+            width_part_walls: null,
+            width_rul_walls:null,
 
 
             wall_area: null,
             floor_area: null,
+            calc_number_floor: null,
+            calc_number_ceiling: null,
+            calc_number_wall: null,
             plaster: null,
             cost_plaster: null,
             level_filling: null,
@@ -37,19 +44,17 @@ const App = {
             cost_finish_filling: null,
             primer: null,
             cost_primer: null,
-            filling_floor: null,
-            cost_filling_floor: null,
+            filling_ceiling: null,
+            cost_filling_ceiling: null,
             coupler: null,
             cost_coupler: null,
-            number_items: null,
-            number_roll: null,
-            cost_wallpaper: null,
-            number_paint: null,
-            cost_paint: null,
-            length_list: null,
-            cost_material: null,
-            calc_number: null,
-            cost: null
+            cost_material_floor: null,
+            cost_material_ceiling: null,
+            cost_material_walls: null,
+            cost_ceiling: null,
+            cost_walls: null,
+            cost_floor: null,
+            full_cost: null
         }
     },
     methods: {
@@ -63,111 +68,257 @@ const App = {
 //   #///     Площадь пол/потолок ###
             this.floor_area = this.long_room * this.width_room
         },
+        get_res(unit, area, width_room, long_room, height_room, thickness, consumption,
+                length_part, width_part, long_raport) {
 
 
-
-        get_res(unit, area, thickness, consumption, weight, width_room, width_material, long_room, height_room,
-                price_material, length_part, width_part, number_in_packeging,
-                raport, length_plint) {
-
-
-            if (unit == "кг") {
+            if (unit == "кг") { //Расчёт материалов измеряемых в килограммах
                 // Площадь * Толщину слоя * Расход на 1м2 = количестов в кг
                 let calc_number = Math.ceil(area * thickness * consumption)
-                // Цена за мешок / кг в мешке * Количество
-                let cost = (price_material / weight) * calc_number
-                return {calc_number: calc_number, cost: cost}//"кг"
+                return calc_number//"кг"
 
 
-            } else if (unit == "м.п.") {
-                let number_list = width_room / width_material
+            } else if (unit == "м.п.") { // Расчёт материалов измеряемых в метрах погонных
+                let number_list = width_room / width_part
                 let length_list = parseFloat((long_room * number_list).toFixed(2) ) ///   в метрах погонных
-                let cost_material = length_list * price_material
 
-                return {length_list: length_list, cost_material: cost_material}// "м_погон"
+                return length_list// "метры погонные"
 
 
-            } else if (unit == "шт") {
+            } else if (unit == "шт") { // Расчёт материалов измеряемых в количестве штук
                 let value_area = area + (area * 0.05)
                 let part_area = (length_part * width_part)
-                let number_parts = value_area / part_area  ///   Штук  (не упаковок)
-                let number_packegs = Math.ceil(number_parts / number_in_packeging)  ///   Количество упаковок
-                let cost = number_packegs * price_material
+                let number_parts = Math.ceil(value_area / part_area)  ///   Штук  (не упаковок)
 
-                return {number_packegs: number_packegs, cost: cost} // "шт"
+                return number_parts// "шт"
 
 
-            } else if (unit == "л") {
-                let number_paint = parseFloat((area / weight).toFixed(2))
-                let cost_paint = price_material * number_paint
+            } else if (unit == "л") { // Расчёт материалов измеряемых в литрах
+                let number_paint = parseFloat((area * consumption).toFixed(2))
+                return number_paint //"л"
+            }
 
-                return {number_paint: number_paint, cost_paint: cost_paint}  //"л"
-            } 
-            else if (unit == "рул") {
+
+            else if (unit == "рул") { // Расчёт материалов измеряемых в рулонах
                 let number_roll = 0
-                let checkbox_stik_p = true
-                if (raport == null) {
-                    number_roll = Math.ceil(((long_room + width_room) * 2 / width_material) * height_room / 10)
-                } else {
-                    if (checkbox_stik_p == true) {
-                        number_roll = Math.ceil(((long_room + width_room) * 2 / width_material) * (height_room + raport) / 10)
+                if (this.raport == "1") {
+                    if (this.raport_true == "1") {
+                        number_roll = Math.ceil(((long_room + width_room) * 2 / width_part) * (height_room + 1.5 * long_raport) / 10)
 
                     } else {
-                        number_roll = Math.ceil(((long_room + width_room) * 2 / width_material) * (height_room + 1.5 * raport) / 10)
+                        number_roll = Math.ceil(((long_room + width_room) * 2 / width_part) * (height_room + long_raport) / 10)
                     }
+                } else {
+                    number_roll = Math.ceil(((long_room + width_room) * 2 / width_part) * height_room / 10)
                 }
-                let cost_wallpaper = price_material * number_roll
 
-                return {number_roll: number_roll, cost_wallpaper: cost_wallpaper}   //"рул"
+                return number_roll//"рул"
 
-            } else if (unit == "м") {
-                let number_items = (2 * long_room + 2 * width_room) / length_plint
-                return {number_items: number_items}// "шт для м"
 
             } 
-            else if (unit == "м2") {
+            else if (unit == "м2") { // Расчёт материалов измеряемых в метрах квадратных
                 let length_list = parseFloat((area / 2.6).toFixed(2))
-                let cost_material = length_list * price_material
 
-                return {length_list: length_list, cost_material: cost_material}// "м_погон"
+                return length_list// "м2"
             }
                 else return 0
         },
-
-        full_calc() {
+        cost_items(price_material, calc_number){
+            let costs = parseFloat((price_material * calc_number).toFixed(2))
+            return costs
+        },
+        full_calc() {  // Функция запускает проверки и соответсвующие ей функции рассчёта
             this.square()
-            let material_ceiling = document.getElementById("input_ceiling").value;
-            let material_floor = document.getElementById("input_floor").value;
-            let material_walls = document.getElementById("input_wall").value;
+            this.material_ceiling = document.getElementById("input_ceiling").value;
+            this.material_floor = document.getElementById("input_floor").value;
+            this.material_walls = document.getElementById("input_wall").value;
 
             document.getElementById('output1').style.display = 'block';
 
-            if (material_floor != 0) {
-                let obj_floor = this.get_res(material_floor, this.floor_area, 0.4, 33, 30,
-                    this.width_room, this.width_material, this.long_room, this.height_room, this.price_material = 1000,
-                    this.length_part = 1.2, this.width_part = 0.4, this.number_in_packeging = 10, 
-                     this.raport, this.length_plint)
-                console.log(obj_floor)
+            if (this.material_floor != 0) { // Расчёт материалов для пола и их цены
+                // / Черновые работы
+                ///   Стяжка (в кг)
+                this.coupler = parseFloat((this.floor_area * 0.3 * 33).toFixed(2))
+                this.cost_coupler = this.coupler * 17
 
+                /// Пользовательские работы
+                this.calc_number_floor = this.get_res(this.material_floor, this.floor_area, this.width_room,
+                    this.long_room, this.height_room,0.4, this.rashod_kraska_floor, 
+                    this.length_part_floor, this.width_part_floor, this.long_raport)
+                this.cost_material_floor = this.cost_items(this.price_floor, this.calc_number_floor)
+
+                /// Общая стоимость для поверхности
+                this.cost_floor = this.cost_coupler + this.cost_material_floor
+            } else{
+                this.coupler = null
+                this.cost_coupler = null
+                this.cost_floor = 0
+                this.calc_number_floor = null
+                this.cost_material_floor = null
             }
 
 
-            if (material_ceiling != 0) {
-                let obj_ceiling =  this.get_res(material_ceiling, this.floor_area, 0.4, 33, 30,
-                    this.width_room, this.width_material, this.long_room, this.height_room, this.price_material = 1000,
-                 this.length_part = 1, this.width_part = 0.5, this.number_in_packeging = 10,
-                     this.raport, this.length_plint)
-                console.log(obj_ceiling)
+            if (this.material_ceiling != 0) { // Расчёт материалов для потолка и их цены
 
+                // / Черновые работы, пол = потолок
+                //Расчёт Шпатлёвка (в кг)
+                this.filling_ceiling = parseFloat((this.floor_area * 1 * 0.2).toFixed(2))
+                this.cost_filling_ceiling = 40 * this.filling_ceiling
+
+                /// Пользовательские работы
+                this.calc_number_ceiling =  this.get_res(this.material_ceiling, this.floor_area, this.width_room,
+                    this.long_room, this.height_room, 0.4, this.rashod_kraska_ceiling, 
+                    this.length_part_ceiling, this.width_part_ceiling, this.long_raport)
+                this.cost_material_ceiling = this.cost_items(this.price_ceiling, this.calc_number_ceiling)
+                /// Общая стоимость для поверхности
+                this.cost_ceiling = this.cost_filling_ceiling + this.cost_material_ceiling
+            } else{
+                this.calc_number_ceiling = null
+                this.cost_material_ceiling = null
+                this.filling_ceiling = null
+                this.cost_filling_ceiling = null
+                this.cost_ceiling = 0
             }
 
 
-            if (material_walls != 0) {
-                let obj_walls = this.get_res(material_walls, this.wall_area, 0.1, 2, 30,
-                    this.width_room, this.width_material = 1, this.long_room, this.height_room, this.price_material = 1000,
-                     this.length_part = 2.5, this.width_part = 0.2, this.number_in_packeging = 10,
-                     this.raport = 0.35, this.length_plint)
-                console.log(obj_walls)
+            if (this.material_walls != 0) {  // Расчёт материалов для стен и их цены
+                // Черновые работы
+                    ///    Расчёт Штукатурки
+                this.plaster = parseFloat((this.wall_area * 1 * 0.9).toFixed(2)) //тут выводит криво без округления
+                this.cost_plaster = parseFloat((14 * this.plaster).toFixed(2))
+
+
+                    ///   Расчёт Шпатлёвки (в кг)
+                this.level_filling = parseFloat((this.wall_area * 4.5 * 0.5).toFixed(2))
+                this.finish_filling = parseFloat((this.wall_area * 1 * 0.2).toFixed(2))
+                this.cost_level_filling = 43 * this.level_filling
+                this.cost_finish_filling = 40 * this.finish_filling
+
+
+                    ///   Грунтовка (в кг)
+                this.primer = parseFloat((this.wall_area * 0.16).toFixed(2))
+                this.cost_primer = 84 * this.primer
+
+                /// Пользовательские работы
+                this.calc_number_wall = this.get_res(this.material_walls, this.wall_area,  this.width_room, this.long_room,
+                    this.height_room, 0.1, this.rashod_kraska_walls, this.length_part_walls, this.width_rul_walls, this.long_raport)
+                this.cost_material_walls = this.cost_items(this.price_walls, this.calc_number_wall)
+                /// Общая стоимость для поверхности
+                this.cost_walls = this.cost_plaster + this.cost_level_filling + this.cost_finish_filling +
+                    this.cost_primer + this.cost_material_walls
+            } else{
+                this.calc_number_wall = null
+                this.cost_material_walls = null
+                this.plaster = null
+                this.cost_plaster = null
+                this.level_filling = null
+                this.cost_level_filling = null
+                this.level_filling = null
+                this.cost_level_filling = null
+                this.primer = null
+                this.cost_primer = null
+                this.cost_walls = 0
+            }
+
+            this.full_cost = parseFloat((this.cost_walls + this.cost_ceiling + this.cost_floor).toFixed(2))
+        },
+        changeRaport(){
+                if (this.raport == "0") {
+                    document.getElementById('div_raport_true').style.display = 'none';
+                } else {
+                    document.getElementById('div_raport_true').style.display = 'block';
+                }
+        },
+        onChangeSelectedCeiling(){ //проверка на изменение выбора материалов потолка и добавление инпутов для более точных рассчетов
+            this.material_ceiling = document.getElementById("input_ceiling").value;
+
+            if( this.material_ceiling == 'шт' ){
+                document.getElementById('select1_id1').style.display = 'block';
+                document.getElementById('select1_id2').style.display = 'none';
+                document.getElementById('select1_id3').style.display = 'none';
+                document.getElementById('select1_id4').style.display = 'none';
+              }
+            else if(this.material_ceiling == 'л'){
+                document.getElementById('select1_id1').style.display = 'none';
+                document.getElementById('select1_id2').style.display = 'block';
+                document.getElementById('select1_id3').style.display = 'none';
+                document.getElementById('select1_id4').style.display = 'none';               
+            }
+            else if(this.material_ceiling == 'кг'){
+                document.getElementById('select1_id1').style.display = 'none';
+                document.getElementById('select1_id2').style.display = 'none';
+                document.getElementById('select1_id3').style.display = 'block';
+                document.getElementById('select1_id4').style.display = 'none';  
+            }
+            else if(this.material_ceiling == 'м2'){
+                document.getElementById('select1_id1').style.display = 'none';
+                document.getElementById('select1_id2').style.display = 'none';
+                document.getElementById('select1_id3').style.display = 'none';
+                document.getElementById('select1_id4').style.display = 'block';  
+            }
+            else{
+                document.getElementById('select1_id1').style.display = 'none';
+                document.getElementById('select1_id2').style.display = 'none';
+                document.getElementById('select1_id3').style.display = 'none';
+                document.getElementById('select1_id4').style.display = 'none';
+            }
+        },
+        onChangeSelectedFloor(){ //проверка на изменение выбора материалов пола и добавление инпутов для более точных рассчетов
+            this.material_floor = document.getElementById("input_floor").value;
+
+            if( this.material_floor == 'шт' ){
+                document.getElementById('select3_id1').style.display = 'block';
+                document.getElementById('select3_id2').style.display = 'none';
+                document.getElementById('select3_id3').style.display = 'none';
+              }
+            else if(this.material_floor == 'м.п.'){
+                document.getElementById('select3_id1').style.display = 'none';
+                document.getElementById('select3_id2').style.display = 'block';
+                document.getElementById('select3_id3').style.display = 'none';
+            }
+            else if(this.material_floor == 'л'){
+                document.getElementById('select3_id1').style.display = 'none';
+                document.getElementById('select3_id2').style.display = 'none';
+                document.getElementById('select3_id3').style.display = 'block';
+            }
+            else{
+                document.getElementById('select3_id1').style.display = 'none';
+                document.getElementById('select3_id2').style.display = 'none';
+                document.getElementById('select3_id3').style.display = 'none';
+            }
+        }, 
+        onChangeSelectedWalls(){ //проверка на изменение выбора материалов стен и добавление инпутов для более точных рассчетов
+            this.material_wall = document.getElementById("input_wall").value;
+
+            if( this.material_wall == 'кг' ){
+                document.getElementById('select2_id1').style.display = 'block';
+                document.getElementById('select2_id2').style.display = 'none';
+                document.getElementById('select2_id3').style.display = 'none';
+                document.getElementById('select2_id4').style.display = 'none';
+              }
+            else if(this.material_wall == 'л'){
+                document.getElementById('select2_id1').style.display = 'none';
+                document.getElementById('select2_id2').style.display = 'block';
+                document.getElementById('select2_id3').style.display = 'none';
+                document.getElementById('select2_id4').style.display = 'none';
+            }
+            else if(this.material_wall == 'шт'){
+                document.getElementById('select2_id1').style.display = 'none';
+                document.getElementById('select2_id2').style.display = 'none';
+                document.getElementById('select2_id3').style.display = 'block';
+                document.getElementById('select2_id4').style.display = 'none';
+            }
+            else if(this.material_wall == 'рул'){
+                document.getElementById('select2_id1').style.display = 'none';
+                document.getElementById('select2_id2').style.display = 'none';
+                document.getElementById('select2_id3').style.display = 'none';
+                document.getElementById('select2_id4').style.display = 'block';
+            }
+            else{
+                document.getElementById('select2_id1').style.display = 'none';
+                document.getElementById('select2_id2').style.display = 'none';
+                document.getElementById('select2_id3').style.display = 'none';
+                document.getElementById('select2_id4').style.display = 'none';
             }
         }
     }
