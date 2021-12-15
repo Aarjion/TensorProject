@@ -105,11 +105,10 @@
       <div class="form-group col-md-4">
         <label> <b> Потолок </b> </label>
 
-        <select  id="input_ceiling" class="form-control" name="select" @change="onChangeSelectedCeiling">
+        <select  id="input_ceiling" class="form-control" name="select" @change="onChangeSelectedCeiling" style="width: 200px;">
           <option value="0" selected>Выбрать материал</option>
           {% for opt in range(option_ceiling|length) %}
           <option value="{{ option_ceiling[opt][2] }}">{{ option_ceiling[opt][1] }}</option>
-          <option value="шт">Потолочная плитка</option>
           {% endfor %}
 
         </select>
@@ -117,125 +116,124 @@
 
 <!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОТОЛКА -->
 
-                            <div id="select1_id1">
-                              <div class="form-group col-md-7">
-                                <label> Длина предмета </label>
-                                <input type="text" class="form-control" v-model.number="length_part_ceiling" id="length_part_ceiling" placeholder="0.0 (м)" >
-                              </div> 
-                              <div class="form-group col-md-7">
-                                <label> Ширина предмета</label>
-                                <input type="text" class="form-control" v-model.number="width_part_ceiling" id="width_part_ceiling" placeholder="0.0 (м)" >
-                              </div> 
-                              <div class="form-group col-md-7">
-                                <label> Стоимость </label>
-                                <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder=" (руб/шт)" >
-                              </div>
-                            </div>
+    <div id="select1_id1">
+      <div class="form-group col-md-7">
+        <label> Длина предмета </label>
+        <input type="text" class="form-control" v-model.number="length_part_ceiling" id="length_part_ceiling" placeholder="0.0 (м)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Ширина предмета</label>
+        <input type="text" class="form-control" v-model.number="width_part_ceiling" id="width_part_ceiling" placeholder="0.0 (м)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder=" (руб/шт)" >
+      </div>
+    </div>
 
-                            <div id="select1_id2">
-                              <div class="form-group col-md-7">
-                                <label> Нормативный <br /> расход краски </label>
-                                <input type="text" class="form-control" v-model.number="rashod_kraska_ceiling" id="rashod_kraska_ceiling" placeholder="0.0 (л/м2)" >
-                              </div> 
-                              <div class="form-group col-md-7">
-                                <label> Стоимость </label>
-                                <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder="0.0 (руб/л)" >
-                              </div>
-                              <div class="">                               
-                              </div> 
-                            </div>
+    <div id="select1_id2">
+      <div class="form-group col-md-7">
+        <label> Нормативный <br /> расход краски </label>
+        <input type="text" class="form-control" v-model.number="rashod_kraska_ceiling" id="rashod_kraska_ceiling" placeholder="0.0 (л/м2)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder="0.0 (руб/л)" >
+      </div>
+      <div class="">                               
+      </div> 
+    </div>
 
-                            <div id="select1_id3">
-                              <div class="form-group col-md-7">
-                                <label> Стоимость </label>
-                                <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder=" (руб/кг)" >
-                              </div>
-                            </div>
+    <div id="select1_id3">
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder=" (руб/кг)" >
+      </div>
+    </div>
 
-                            <div id="select1_id4">
-                              <div class="form-group col-md-7">
-                                <label> Стоимость </label>
-                                <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder=" (руб/м2)" >
-                              </div>
-                            </div>
+    <div id="select1_id4">
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_ceiling" id="price_ceiling" placeholder=" (руб/м2)" >
+      </div>
+    </div>
 
                                 
                                 
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-4" >
         <label> <b> Стена </b> </label>
 
-        <select id="input_wall" class="form-control" name="select_5" @change="onChangeSelectedWalls">
+        <select id="input_wall" class="form-control" name="select_5" @change="onChangeSelectedWalls" style="width: 200px;">
           <option value="0" selected> Выбрать материал </option>
           {% for opt in range(option_walls|length) %}
           <option value="{{ option_walls[opt][2] }}">{{ option_walls[opt][1] }}</option>
-          <option value="рул">Обои</option>
           {% endfor %}
         </select>
       </div>
      
 <!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ СТЕН -->
-                                          <div id="select2_id1">
-                                            <div class="form-group col-md-7">
-                                              <label> Расход на м2 </label>
-                                              <input type="text" class="form-control" v-model.number="rashod_kraska_walls" id="rashod_kraska_walls" placeholder="0.0 (кг/м2)" >
-                                              <label> Стоимость </label>
-                                              <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder=" (руб/кг)" >
-                                            </div>
-                                          </div>
+    <div id="select2_id1">
+      <div class="form-group col-md-7">
+        <label> Расход на м2 </label>
+        <input type="text" class="form-control" v-model.number="rashod_kraska_walls" id="rashod_kraska_walls" placeholder="0.0 (кг/м2)" >
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder=" (руб/кг)" >
+      </div>
+    </div>
 
-                                          <div id="select2_id2">
-                                            <div class="form-group col-md-7">
-                                              <label> Нормативный <br /> расход краски </label>
-                                              <input type="text" class="form-control" v-model.number="rashod_kraska_walls" id="rashod_kraska_walls" placeholder="0.0 (л/м2)" >
-                                            </div> 
-                                            <div class="form-group col-md-7">
-                                              <label> Стоимость </label>
-                                              <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder="0.0 (руб/л)" >
-                                            </div>
-                                          </div>
+    <div id="select2_id2">
+      <div class="form-group col-md-7">
+        <label> Нормативный <br /> расход краски </label>
+        <input type="text" class="form-control" v-model.number="rashod_kraska_walls" id="rashod_kraska_walls" placeholder="0.0 (л/м2)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder="0.0 (руб/л)" >
+      </div>
+    </div>
 
-                                          <div id="select2_id3">
-                                            <div class="form-group col-md-7">
-                                              <label> Длина предмета </label>
-                                              <input type="text" class="form-control" v-model.number="length_part_walls" id="length_part_walls" placeholder="0.0 (м)" >
-                                            </div> 
-                                            <div class="form-group col-md-7">
-                                              <label> Ширина предмета</label>
-                                              <input type="text" class="form-control" v-model.number="width_part_walls" id="width_part_walls" placeholder="0.0 (м)" >
-                                            </div> 
-                                            <div class="form-group col-md-7">
-                                              <label> Стоимость </label>
-                                              <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder=" (руб/шт)" >
-                                            </div>
-                                          </div>
+    <div id="select2_id3">
+      <div class="form-group col-md-7">
+        <label> Длина предмета </label>
+        <input type="text" class="form-control" v-model.number="length_part_walls" id="length_part_walls" placeholder="0.0 (м)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Ширина предмета</label>
+        <input type="text" class="form-control" v-model.number="width_part_walls" id="width_part_walls" placeholder="0.0 (м)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder=" (руб/шт)" >
+      </div>
+    </div>
 
-                                          <div id="select2_id4">                                          
-                                            <div class="form-group col-md-7">
-                                              <label> Ширина рулона</label>
-                                              <input type="text" class="form-control" v-model.number="width_rul_walls" id="width_rul_walls" placeholder="0.0 (м)" >
-                                            </div> 
-                                            <div class="form-group col-md-7">
-                                              <label> Стоимость </label>
-                                              <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder=" (руб/рул)" >
-                                            </div>
-                                            <div class="form-group col-md-7">
-                                              <input type="radio" id="raport" value="0" v-model="raport" @change="changeRaport">
-                                              <label for="two">Без рапорта</label>
+    <div id="select2_id4">                                          
+      <div class="form-group col-md-7">
+        <label> Ширина рулона</label>
+        <input type="text" class="form-control" v-model.number="width_rul_walls" id="width_rul_walls" placeholder="0.0 (м)" >
+      </div> 
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control" v-model.number="price_walls" id="price_walls" placeholder=" (руб/рул)" >
+      </div>
+      <div class="form-group col-md-7">
+        <input type="radio" id="raport" value="0" v-model="raport" @change="changeRaport">
+        <label for="two">Без рапорта</label>
 
-                                              <input type="radio" id="raport" value="1" v-model="raport" @change="changeRaport">
-                                              <label for="one">С рапортом</label>
-                                              <div class="form-group col-md-7" id="div_raport_true">
-                                                <label>Длина рапорта</label>
-                                                <input type="text" class="form-control" v-model.number="long_raport" id="long_raport" placeholder="0.0 (м)" >
-                                                <input type="radio" id="raport_p" value="0" v-model="raport_true">
-                                                <label for="one">Прямое соединение</label>
-                                                <input type="radio" id="raport_s" value="1" v-model="raport_true">
-                                                <label for="one">Со смещением</label>
-                                              </div>
-                                          </div>
-                                        </div>
+        <input type="radio" id="raport" value="1" v-model="raport" @change="changeRaport">
+        <label for="one">С рапортом</label>
+        <div class="form-group col-md-7" id="div_raport_true">
+          <label>Длина рапорта</label>
+          <input type="text" class="form-control" v-model.number="long_raport" id="long_raport" placeholder="0.0 (м)" >
+          <input type="radio" id="raport_p" value="0" v-model="raport_true">
+          <label for="one">Прямое соединение</label>
+          <input type="radio" id="raport_s" value="1" v-model="raport_true">
+          <label for="one">Со смещением</label>
+        </div>
+    </div>
+  </div>
 
                                           
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
@@ -243,56 +241,54 @@
       <div class="form-group col-md-4">
         <label> <b> Пол </b> </label>
 
-        <select id="input_floor" class="form-control" name="select_5" @change="onChangeSelectedFloor">
+        <select id="input_floor" class="form-control" name="select_5" @change="onChangeSelectedFloor" style="width: 200px;">
           <option value="0" selected> Выбрать материал </option>
           {% for opt in range(option_floor|length) %}
           <option value="{{ option_floor[opt][2] }}">{{ option_floor[opt][1] }}</option>
-          <option value="шт">Плитка</option>
           {% endfor %}
         </select>
       </div>
 
-    </div>
 
 <!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА -->      
-                      <div id="select3_id1">
-                        <div class="form-group col-md-7">
-                          <label> Длина <br /> предмета </label>
-                          <input type="text" class="form-control"  v-model.number="length_part_floor" id="length_part_floor" placeholder="0.0 (м)" >
-                        </div> 
-                        <div class="form-group col-md-7">
-                          <label> Ширина <br /> предмета</label>
-                          <input type="text" class="form-control"  v-model.number="width_part_floor" id="width_part_floor" placeholder="0.0 (м)" >
-                        </div> 
-                        <div class="form-group col-md-7">
-                          <label> Стоимость </label>
-                          <input type="text" class="form-control"  v-model.number="price_floor" id="price_floor" placeholder=" (руб/шт)" >
-                        </div>
-                      </div>
+  <div id="select3_id1">
+    <div class="form-group col-md-7">
+      <label> Длина <br /> предмета </label>
+      <input type="text" class="form-control"  v-model.number="length_part_floor" id="length_part_floor" placeholder="0.0 (м)" >
+    </div> 
+    <div class="form-group col-md-7">
+      <label> Ширина <br /> предмета</label>
+      <input type="text" class="form-control"  v-model.number="width_part_floor" id="width_part_floor" placeholder="0.0 (м)" >
+    </div> 
+    <div class="form-group col-md-7">
+      <label> Стоимость </label>
+      <input type="text" class="form-control"  v-model.number="price_floor" id="price_floor" placeholder=" (руб/шт)" >
+    </div>
+  </div>
 
-                      <div id="select3_id2">
-                        <div class="form-group col-md-7">
-                          <label> Ширина листа</label>
-                          <input type="text" class="form-control"  v-model.number="width_list_floor" id="width_list_floor" placeholder="0.0 (м)" >
-                        </div> 
-                        <div class="form-group col-md-7">
-                          <label> Стоимость </label>
-                          <input type="text" class="form-control"  v-model.number="price_floor" id="price_floor" placeholder=" (руб/м.п)" >
-                        </div>
-                      </div>
+  <div id="select3_id2">
+    <div class="form-group col-md-7">
+      <label> Ширина листа</label>
+      <input type="text" class="form-control"  v-model.number="width_list_floor" id="width_list_floor" placeholder="0.0 (м)" >
+    </div> 
+    <div class="form-group col-md-7">
+      <label> Стоимость </label>
+      <input type="text" class="form-control"  v-model.number="price_floor" id="price_floor" placeholder=" (руб/м.п)" >
+    </div>
+  </div>
 
-                      <div id="select3_id3">
-                        <div class="form-group col-md-7">
-                          <label> Нормативный <br /> расход краски </label>
-                          <input type="text" class="form-control"  v-model.number="rashod_kraska_floor" id="rashod_kraska_floor" placeholder="0.0 (л/м2)" >
-                        </div> 
-                        <div class="form-group col-md-7">
-                          <label> Стоимость </label>
-                          <input type="text" class="form-control"  v-model.number="price_floor" id="price_floor" placeholder="0.0 (руб/л)" >
-                        </div>
-                        <div class="">                               
-                        </div> 
-                      </div>
+  <div id="select3_id3">
+    <div class="form-group col-md-7">
+      <label> Нормативный <br /> расход краски </label>
+      <input type="text" class="form-control"  v-model.number="rashod_kraska_floor" id="rashod_kraska_floor" placeholder="0.0 (л/м2)" >
+    </div> 
+      <div class="form-group col-md-7">
+        <label> Стоимость </label>
+        <input type="text" class="form-control"  v-model.number="price_floor" id="price_floor" placeholder="0.0 (руб/л)" >
+      </div>                             
+    </div> 
+  </div>
+
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
         </form>
     </div>
@@ -372,19 +368,12 @@
   ИТОГО: <span class="output_value"> [[full_cost]] руб.  </span>
 </p>
  
-
 <a href="#" class="button28" onclick="javascript:window.print()" > Скачать </a>
-
 </div>
-  
+  <div style="height:500px;"></div>
 </div> 
 
-
-
-
-
-
-<footer class="text-center text-lg-start text-white"
+ <footer class="text-center text-lg-start text-white"
             style="background-color: #1c2331; margin-top: 5.9%;" >
 </section>
 
@@ -454,7 +443,6 @@
       
     </div>
   </div>
-
 </div>
 </section>
 
@@ -465,16 +453,10 @@
 © 2021 Copyright:
 <a class="text-white" href="https://PPM.ru/"
    >PPM.ru</a>
-
-
-
-
-
 </body>
 
 
 <script src="https://unpkg.com/vue@next"></script>
-<script src="../static/counter.js"></script>
 <script src="../static/Calculate.js"></script>
 
 </html>

@@ -1,13 +1,10 @@
-from flask import Flask, request, session, redirect, json
+from flask import Flask, request, session
 from flask.templating import render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-#from flask_login import login_required#, LoginManager#, UserMixin
 import hashlib
 from sqlalchemy import text
-import re
   
-
 app = Flask(__name__, template_folder="app/templates", static_folder="app/static/")
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:7105@localhost/tensor'
@@ -24,7 +21,6 @@ class User(db.Model):
     def __init__(self, login, password):
         self.login=login
         self.password=password
-        #self.table_apartment=table_apartment
 
 class Materials(db.Model):
     __tablename__='materials' 
@@ -33,26 +29,6 @@ class Materials(db.Model):
     units_measurement = db.Column(db.String)
     surfaces = db.Column(db.String(3))
     auto = db.Column(db.Integer)
-
-class Autotools(db.Model):
-    __tablename__='autotools' 
-    id = db.Column(db.Integer, primary_key=True)
-    name_tools = db.Column(db.String)
-
-class Apartments(db.Model):
-    __tablename__='apartment' 
-    id = db.Column(db.Integer, primary_key=True)
-    name_room = db.Column(db.String)
-    id_materials_ceiling = db.Column(db.Integer)
-    id_tools_ceiling = db.Column(db.Integer)
-    id_materials_floor = db.Column(db.Integer)
-    id_tools_floor = db.Column(db.Integer)
-    id_materials_walls = db.Column(db.Integer)
-    id_tools_walls = db.Column(db.Integer)
-    id_auto_material = db.Column(db.Integer)
-    id_tools_auto_material = db.Column(db.Integer)
-    square_walls = db.Column(db.Float)
-    square_floor_ceiling = db.Column(db.Float)
 
     def __init__(self, square_walls, square_floor_ceiling):
         self.square_walls=square_walls
@@ -151,36 +127,6 @@ def exit():
     session['user'] = ''
     return render_template('counterPage.html')
 
-
-@app.route('/save', methods=['POST', 'GET'])
-def save():
-    message = ''
-    username = request.form.get('name_room')
-    password = request.form.get('check_pass')
-    try: 
-        apartment = Apartments(id = session['user'],
-    name_room = request.form.get('name_room'),
-    id_materials_ceiling = username,
-    id_tools_ceiling = username,
-    id_materials_floor = username,
-    id_tools_floor = username,
-    id_materials_walls = username,
-    id_tools_walls = username,
-    id_auto_material = username,
-    id_tools_auto_material = username,
-    square_walls = username,
-    square_floor_ceiling = username)
-
-        db.session.add(apartment)
-        db.session.commit()
-
-    except Exception:
-        message="Ошибка при сохранении"
-    else:
-        message = "Успешно"
-    return render_template('account.html', message=message)
-
-    
 if __name__ == '__main__':
     app.run(debug=True)
 

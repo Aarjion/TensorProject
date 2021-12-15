@@ -79,7 +79,7 @@ const App = {
 
 
             } else if (unit == "м.п.") { // Расчёт материалов измеряемых в метрах погонных
-                let number_list = width_room / width_part
+                let number_list = width_room / this.width_list_floor
                 let length_list = parseFloat((long_room * number_list).toFixed(2) ) ///   в метрах погонных
 
                 return length_list// "метры погонные"
@@ -139,17 +139,16 @@ const App = {
                 // / Черновые работы
                 ///   Стяжка (в кг)
                 this.coupler = parseFloat((this.floor_area * 0.3 * 33).toFixed(2))
-                this.cost_coupler = parseFloat((this.coupler * 17).toFixed(2))
+                this.cost_coupler = this.coupler * 17
 
                 /// Пользовательские работы
                 this.calc_number_floor = this.get_res(this.material_floor, this.floor_area, this.width_room,
-                    this.long_room, this.height_room,0.4, this.rashod_kraska_floor, this.length_part_floor,
-                    this.width_part_floor, this.long_raport)
-                this.cost_material_floor =  parseFloat((this.cost_items(this.price_floor,
-                    this.calc_number_floor)).toFixed(2))
+                    this.long_room, this.height_room, 0.4, this.rashod_kraska_floor, 
+                    this.length_part_floor, this.width_part_floor, this.long_raport)
+                this.cost_material_floor = this.cost_items(this.price_floor, this.calc_number_floor)
 
                 /// Общая стоимость для поверхности
-                this.cost_floor = parseFloat((this.cost_coupler + this.cost_material_floor).toFixed(2))
+                this.cost_floor = this.cost_coupler + this.cost_material_floor
             } else{
                 this.coupler = null
                 this.cost_coupler = null
@@ -164,14 +163,13 @@ const App = {
                 // / Черновые работы, пол = потолок
                 //Расчёт Шпатлёвка (в кг)
                 this.filling_ceiling = parseFloat((this.floor_area * 1 * 0.2).toFixed(2))
-                this.cost_filling_ceiling = parseFloat((40 * this.filling_ceiling).toFixed(2))
+                this.cost_filling_ceiling = 40 * this.filling_ceiling
 
                 /// Пользовательские работы
                 this.calc_number_ceiling =  this.get_res(this.material_ceiling, this.floor_area, this.width_room,
-                    this.long_room, this.height_room, 0.4, this.rashod_kraska_ceiling, this.length_part_ceiling,
-                    this.width_part_ceiling, this.long_raport)
-                this.cost_material_ceiling =  parseFloat((this.cost_items(this.price_ceiling,
-                    this.calc_number_ceiling)).toFixed(2))
+                    this.long_room, this.height_room, 0.4, this.rashod_kraska_ceiling, 
+                    this.length_part_ceiling, this.width_part_ceiling, this.long_raport)
+                this.cost_material_ceiling = this.cost_items(this.price_ceiling, this.calc_number_ceiling)
                 /// Общая стоимость для поверхности
                 this.cost_ceiling = this.cost_filling_ceiling + this.cost_material_ceiling
             } else{
@@ -186,26 +184,25 @@ const App = {
             if (this.material_walls != 0) {  // Расчёт материалов для стен и их цены
                 // Черновые работы
                     ///    Расчёт Штукатурки
-                this.plaster = parseFloat((this.wall_area * 1 * 0.9).toFixed(2))
+                this.plaster = parseFloat((this.wall_area * 1 * 0.9).toFixed(2)) //тут выводит криво без округления
                 this.cost_plaster = parseFloat((14 * this.plaster).toFixed(2))
 
 
                     ///   Расчёт Шпатлёвки (в кг)
                 this.level_filling = parseFloat((this.wall_area * 4.5 * 0.5).toFixed(2))
                 this.finish_filling = parseFloat((this.wall_area * 1 * 0.2).toFixed(2))
-                this.cost_level_filling = parseFloat((43 * this.level_filling).toFixed(2))
-                this.cost_finish_filling = parseFloat((40 * this.finish_filling).toFixed(2))
+                this.cost_level_filling = 43 * this.level_filling
+                this.cost_finish_filling = 40 * this.finish_filling
 
 
                     ///   Грунтовка (в кг)
                 this.primer = parseFloat((this.wall_area * 0.16).toFixed(2))
-                this.cost_primer = parseFloat((84 * this.primer).toFixed(2))
+                this.cost_primer = 84 * this.primer
 
                 /// Пользовательские работы
                 this.calc_number_wall = this.get_res(this.material_walls, this.wall_area,  this.width_room, this.long_room,
                     this.height_room, 0.1, this.rashod_kraska_walls, this.length_part_walls, this.width_rul_walls, this.long_raport)
-                this.cost_material_walls =  parseFloat((this.cost_items(this.price_walls,
-                    this.calc_number_wall)).toFixed(2))
+                this.cost_material_walls = this.cost_items(this.price_walls, this.calc_number_wall)
                 /// Общая стоимость для поверхности
                 this.cost_walls = this.cost_plaster + this.cost_level_filling + this.cost_finish_filling +
                     this.cost_primer + this.cost_material_walls

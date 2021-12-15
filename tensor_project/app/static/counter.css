@@ -17,29 +17,25 @@
     padding-left: 2%;
     display: flex;
     flex-direction: column;
-    
-    
-
 }
 #block2{
     padding-left: 20%;
-    margin-top: -22.05%;
+    margin-top: -22.2%;
     display: flex;
     flex-direction: row;
-    
 }
 #block3{
-    padding-left: 50%;
-    padding-right: 2%;
-    margin-top: -22.1%;
+    margin-left: 1.65%;
+    /* padding-right: 2%; */
+    margin-top: 0.5%;
     display: flex;
     flex-direction: row;
+    width: 700px;
 }
-
 
 a.button28 {
     margin-left: 1%;
-    margin-top: 14%;
+    margin-top: 34%;
     position: relative;
     display: inline-block;
     font-size: 90%;
@@ -69,44 +65,46 @@ a.button28 {
      0 1px 1px rgba(255,202,24,.1);
   }
 
-
 /* ПРО ИНПУТЫ ДЛЯ МАТЕРИАЛОВ */
 
 /* ПОТОЛОК *//* ПОТОЛОК *//* ПОТОЛОК *//* ПОТОЛОК *//* ПОТОЛОК */
 #select1_id1,#select1_id2, #select1_id3, #select1_id4 {
     display: none;
-    margin-top: 10%;
+    margin-top: 12%;
     margin-left: -34%;
 }
 
 /* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ *//* СТЕНЫ */
 #select2_id1, #select2_id2, #select2_id3, #select2_id4 {
     display: none;
-    margin-top: 10%;
+    margin-top: 12%;
     margin-left: -34%;
 }
+
 #div_raport_true{ 
     display: none;
     margin-top: 0%;
-    margin-left: -14%;
-
+    margin-left: 0%;
+    width: 200px;
+}
+#div_raport_true input{
+    width: 80px;
 }
 /* ПОЛ *//* ПОЛ *//* ПОЛ *//* ПОЛ *//* ПОЛ *//* ПОЛ */
 #select3_id1, #select3_id2, #select3_id3 {
     display: none;
-    margin-top: -21%;
-    margin-left: 81%;
+    margin-top: 12%;
+    margin-left: -34%;
+    width: 230px;
 }
 
 #output1{
     border: 5px outset rgb(255,202,24);
     border-radius: 5px;
     width: 50%;
-    margin-top: 2%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: -60%;
+    margin-left: 49%;
     display: none;
-
 }
 
 p{
@@ -130,105 +128,6 @@ p{
     #output1 {visibility: visible;}
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*.content{*/
-/*    margin: 0 50px;*/
-/*}*/
-/*.content_choose-room{*/
-/*    width: 100%;*/
-/*    margin: 30px 0;*/
-/*}*/
-/*.content_item{*/
-/*    width: 150px;*/
-/*    display: inline-block;*/
-/*    border: 2px solid black;*/
-/*}*/
-/*.content_choose-type-work{*/
-/*    margin: 30px 0;*/
-/*}*/
-/*.content_item-choose{*/
-/*    width: 170px;*/
-/*    height: 450px;*/
-/*    display: inline-block;*/
-/*    border: 2px solid black;*/
-/*    padding: 10px;*/
-/*}*/
-/*.content_item_photo{*/
-/*    background-color: darkgray;*/
-/*    width: 150px;*/
-/*    height: 80px;*/
-/*    border-radius: 10px;*/
-/*}*/
-/*.name_room{*/
-/*    background-color: darkgray;*/
-/*    width: 150px;*/
-/*    height: 80px;*/
-/*    border-radius: 10px;*/
-/*    text-align: center;*/
-/*    margin: 0 auto;*/
-/*}*/
-/*.item_checkbox{*/
-/*}*/
-/*ul li{*/
-/*    list-style: none;*/
-/*}*/
-/*.content_choose-square{*/
-/*    margin: 30px 0;*/
-
-/*}*/
-/*.content_item-square{*/
-/*    width: 250px;*/
-/*    border: 2px solid black;*/
-/*    display: inline-block;*/
-/*    margin: 10px;*/
-/*}*/
-/*.content_item-materials{*/
-/*    border: 2px solid black;*/
-/*    display: inline-block;*/
-/*    margin: 10px;*/
-/*}*/
-/*input[type="text"]{*/
-/*    width: 50px;*/
-/*}*/
-/*.content_results{*/
-/*    background-color: darkgray;*/
-/*    margin: 30px 0;*/
-/*    padding: 10px 30px;*/
-/*    width: 500px;*/
-/*}*/
-/*.separator{*/
-/*    width: 100%;*/
-/*    height: 30px;*/
-/*    background-color: darkgrey;*/
-/*}*/
-/*.footer{*/
-/*    top: auto;*/
-/*}*/
+.footer{
+    top: auto;
+}
