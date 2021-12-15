@@ -44,7 +44,7 @@
         <div class="form-row" id="block1">
 
             <legend> <h5> ПАРАМЕТРЫ КОМНАТЫ </h5> </legend>
-
+              <br />
              <div class="form-group col-md-1">
                 <label> Длина </label>
                 <input type="text" v-model.number="long_room" class="form-control" id="long_room" placeholder="0.0 (м)" required>
@@ -109,6 +109,7 @@
           <option value="0" selected>Выбрать материал</option>
           {% for opt in range(option_ceiling|length) %}
           <option value="{{ option_ceiling[opt][2] }}">{{ option_ceiling[opt][1] }}</option>
+          <option value="шт">Потолочная плитка</option>
           {% endfor %}
 
         </select>
@@ -169,6 +170,7 @@
           <option value="0" selected> Выбрать материал </option>
           {% for opt in range(option_walls|length) %}
           <option value="{{ option_walls[opt][2] }}">{{ option_walls[opt][1] }}</option>
+          <option value="рул">Обои</option>
           {% endfor %}
         </select>
       </div>
@@ -245,6 +247,7 @@
           <option value="0" selected> Выбрать материал </option>
           {% for opt in range(option_floor|length) %}
           <option value="{{ option_floor[opt][2] }}">{{ option_floor[opt][1] }}</option>
+          <option value="шт">Плитка</option>
           {% endfor %}
         </select>
       </div>
@@ -254,11 +257,11 @@
 <!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА --><!-- ИНПУТЫ С РАСЧЕТАМИ ДЛЯ ПОЛА -->      
                       <div id="select3_id1">
                         <div class="form-group col-md-7">
-                          <label> Длина предмета </label>
+                          <label> Длина <br /> предмета </label>
                           <input type="text" class="form-control"  v-model.number="length_part_floor" id="length_part_floor" placeholder="0.0 (м)" >
                         </div> 
                         <div class="form-group col-md-7">
-                          <label> Ширина предмета</label>
+                          <label> Ширина <br /> предмета</label>
                           <input type="text" class="form-control"  v-model.number="width_part_floor" id="width_part_floor" placeholder="0.0 (м)" >
                         </div> 
                         <div class="form-group col-md-7">
@@ -370,7 +373,7 @@
 </p>
  
 
-<a href="#" class="button28" v-on:click="full_calc" > Скачать Excel </a>
+<a href="#" class="button28" onclick="javascript:window.print()" > Скачать </a>
 
 </div>
   
@@ -381,7 +384,7 @@
 
 
 
-<!-- <footer class="text-center text-lg-start text-white"
+<footer class="text-center text-lg-start text-white"
             style="background-color: #1c2331; margin-top: 5.9%;" >
 </section>
 
@@ -390,9 +393,9 @@
 
   <div class="row mt-3">
 
-    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"> -->
+    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
  
-      <!-- <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
+      <h6 class="text-uppercase fw-bold">Ремонтные расчеты материалов</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -403,9 +406,9 @@
       </p>
     </div>
    
-    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> -->
+    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
   
-      <!-- <h6 class="text-uppercase fw-bold">Наши продукты</h6>
+      <h6 class="text-uppercase fw-bold">Наши продукты</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -416,9 +419,9 @@
       </p>
     </div>
   
-    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5"> -->
+    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-5">
  
-      <!-- <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
+      <h6 class="text-uppercase fw-bold">Полезные ссылки</h6>
       <hr
           class="mb-4 mt-0 d-inline-block mx-auto"
           style="width: 60px; background-color: #FFCA18; height: 2px"
@@ -453,16 +456,16 @@
   </div>
 
 </div>
-</section> -->
+</section>
 
-<!-- <div
+ <div
    class="text-center p-3"
    style="background-color: rgba(0, 0, 0, 0.2)"
    >
 © 2021 Copyright:
 <a class="text-white" href="https://PPM.ru/"
    >PPM.ru</a>
--->
+
 
 
 
